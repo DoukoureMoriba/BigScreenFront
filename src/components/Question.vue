@@ -26,7 +26,7 @@ async getQuestion() {
     
      // Fonction pour afficher la question actuelle
     displayCurrentQuestion() {
-      if (this.index>=0 && this.index<this.question.length -1) {
+      if (this.index>=0 && this.index<this.question.length ) {
         this.currentQuestion = this.question[this.index];
       } else {
         this.currentQuestion = {}; // rénitialisation de la question si la liste est vide
@@ -64,13 +64,10 @@ async getQuestion() {
     <div class="question_main">
       <!-- question de type A-->
       <div class="containerTypeA" v-if="currentQuestion.question_type=='A'">
-       <li>
-        <input type="radio"> djdjdjd
-       </li>
+       <li v-for=" index in currentQuestion.propositions" :key="index">
+        <input type="radio">{{ index }}
+      </li>
 
-       <li>
-        <input type="radio"> ndjdjdj
-       </li>
       </div>
       <!-- question de type B-->
       <div class="containerTypeB" v-if="currentQuestion.question_type=='B'">
