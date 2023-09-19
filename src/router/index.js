@@ -11,8 +11,27 @@ const router = createRouter({
     },
 
     {
-      path: '/',
-      name: 'Sondage',
+      path: '/Dashboard',
+      name: 'Dashboard',
+      component: () => import('../views/Dashboard.vue')
+    },
+
+    {
+      path: '/DashboardQuestion',
+      name: 'DashboardQuestion',
+      component: () => import('../views/DashboardQuestion.vue')
+    },
+
+    {
+      path: '/DashboardResponse',
+      name: 'DashboardResponse',
+      component: () => import('../views/DashboardResponse.vue')
+    },
+
+
+    {
+      path: '/Survey',
+      name: 'Survey',
       component: () => import('../views/Survey.vue')
     },
 

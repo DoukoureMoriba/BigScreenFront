@@ -9,8 +9,8 @@ export default {
       A:"",
       B:"",
       C:"",
-      showNextButton: true, // Afficher par défaut le bouton "Next Question"
-      showFinalizeButton: false, // Ajoutez cette propriété
+      showNextButton: true, // Affichage par défaut le bouton "Next Question"
+      showFinalizeButton: false, // affichage du bouton finalisez a la fin du sondage
     };
   },
 
@@ -19,36 +19,63 @@ export default {
     // Fonction pour récuperer la liste des questions des que l'utilisateur charge la page.
 
 async getQuestion()  {
-
-
       var url = "http://127.0.0.1:8000/api/questionList";
       var res = await(await fetch(url, {
          method: "GET",
         headers: { "Content-Type": "application/json" },
       }) 
       ).json();
-
        if (res.status == "Done") {
              this.question = res.data; // Recuperation de toute les infos dans la table Question depuis l'api.
           }
     },
 
     
-    async submitResp() {
-     var url = "http://127.0.0.1:8000/api/submitResponses";
-    var res = await(await fetch(url, {
-         method: "POST",
-        headers: { "Content-Type": "application/json" },
-      }) 
-      ).json();
+ async submitResp() {
+  var url = "http://127.0.0.1:8000/api/submitResponses";
+  if (this.answers.length > 0) {
+    var responseArray = this.answers.map((response) => {
+      return {
+        questionId: response.questionId,
+        userResponse: response.userResponse,
+      };
+    });
 
-       if (res.status == "Done") {
-             this.question = res.data; // Recuperation de toute les infos dans la table responses depuis l'api.
-          }
-    },
+    console.log("Sending responses:", responseArray);
+
+    var res = await (await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: this.answers[0].userResponse, // Utilise la première réponse pour l'e-mail
+        responses: responseArray, // Envoie d'un tableau d'objets réponse
+      }),
+    })).json();
+
+    console.log("API response:", res);
+
+    if (res.status == "Done") {
+      console.log("Réponses enregistrées avec succès !");
+      // Réinitialisation des réponses après les avoir enregistrées avec succès
+      this.answers = [];
+      this.A = "";
+      this.B = "";
+      this.C = "";
+      this.nextQuestion();
+    } else {
+      console.log("Une erreur s'est produite lors de l'enregistrement des réponses.");
+    }
+  } else {
+    // Gérer le cas où this.answers est vide
+    console.log("Aucune réponse n'a été enregistrée.");
+  }
+},
+
+
+
+
     
 
-    
      // Fonction pour afficher la question actuelle
     displayCurrentQuestion() {
       if (this.index>=0 && this.index<this.question.length ) {
@@ -56,13 +83,6 @@ async getQuestion()  {
       } else {
         this.currentQuestion = {}; // rénitialisation de la question si la liste est vide
       }
-
-  //     // Vérifiez si l'utilisateur est à la dernière question
-  // if (this.index === this.question.length -1) {
-  //   this.showFinalizeButton = true;
-  // } else {
-  //   this.showFinalizeButton = false;
-  // }
     },
     
     // Fonction pour passer à la question suivante
@@ -73,14 +93,14 @@ async getQuestion()  {
     this.showNextButton = true;
     this.showFinalizeButton = false;
   } else {
-    // Si l'utilisateur est à la dernière question, affichez le bouton "Finalisez"
+    // Si l'utilisateur est à la dernière question, elle affiche le bouton "Finalisez"
     this.showNextButton = false;
     this.showFinalizeButton = true;
   }
 },
 
     saveResponse() {
-    // Créez un objet pour stocker la réponse de l'utilisateur
+    // Création d'objet pour stocker la réponse de l'utilisateur
     const response = {
         questionId: this.currentQuestion.id, // L'ID de la question actuelle (ajoutez une propriété ID à vos questions si ce n'est pas déjà fait)
         userResponse: "",
@@ -99,20 +119,20 @@ async getQuestion()  {
     this.answers.push(response);
     console.log(this.answers);
 
-    // Réinitialisez les champs de réponse pour la prochaine question
+    // Réinitialisation des champs de réponse pour la prochaine question
     this.A = "";
     this.B = "";
     this.C = "";
 
-    // Maintenant, vous pouvez utiliser une promesse ou une callback pour appeler nextQuestion une fois la réponse sauvegardée.
+    // utilisation de promesse pour appeler nextQuestion une fois la réponse sauvegardée.
     this.continuerVersQuestionSuivante().then(() => {
         this.nextQuestion();
     });
 },
 
+// Promesse pour appeler nextQuestion une fois la réponse sauvegardée
 continuerVersQuestionSuivante() {
     return new Promise((resolve) => {
-        // Vous pouvez ajouter des opérations asynchrones ici si nécessaire
         resolve();
     });
 },
@@ -120,7 +140,6 @@ continuerVersQuestionSuivante() {
 
 
   },
-
 
 
 
@@ -167,14 +186,7 @@ continuerVersQuestionSuivante() {
       <button class="arrow-next"  @click="saveResponse" v-if="showNextButton">
         <i class="fa-solid fa-arrow-right"></i>
       </button>
-
-
-<button type="submit" v-if="showFinalizeButton" @click="submitResp()" >Finalisez</button>
-
-
-       <!-- Bouton de soumission -->
-    <!-- <button type="submit" @click="submitAnswers()">Soumettre</button> -->
-  
+<button type="submit" v-if="showFinalizeButton" @click.prevent="submitResp" >Finalisez</button>
     </div>
   </div>
 </template>
