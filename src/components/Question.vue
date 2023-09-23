@@ -11,6 +11,7 @@ export default {
       C:"",
       showNextButton: true, // Affichage par défaut le bouton "Next Question"
       showFinalizeButton: false, // affichage du bouton finalisez a la fin du sondage
+      link_url : "",// contient l'url
     };
   },
 
@@ -61,6 +62,7 @@ async getQuestion()  {
       this.A = "";
       this.B = "";
       this.C = "";
+      this.link_url = res.data.url;
       this.nextQuestion();
     } else {
       console.log("Une erreur s'est produite lors de l'enregistrement des réponses.");
@@ -102,7 +104,7 @@ async getQuestion()  {
     saveResponse() {
     // Création d'objet pour stocker la réponse de l'utilisateur
     const response = {
-        questionId: this.currentQuestion.id, // L'ID de la question actuelle (ajoutez une propriété ID à vos questions si ce n'est pas déjà fait)
+        questionId: this.currentQuestion.id, // L'ID de la question actuelle (ajoute une propriété ID à vos questions si ce n'est pas déjà fait)
         userResponse: "",
     };
 
@@ -158,6 +160,7 @@ continuerVersQuestionSuivante() {
     </div>
   </header>
 
+<!-- Début de sondage!-->
   <div class="container-question">
     <div class="question_header">
        <h2 class="text-center title_question"> {{ currentQuestion.title }} </h2>
@@ -186,9 +189,39 @@ continuerVersQuestionSuivante() {
       <button class="arrow-next"  @click="saveResponse" v-if="showNextButton">
         <i class="fa-solid fa-arrow-right"></i>
       </button>
-<button type="submit" v-if="showFinalizeButton" @click.prevent="submitResp" >Finalisez</button>
+<!-- <button type="submit" v-if="showFinalizeButton" @click.prevent="submitResp" >Finalisez</button> -->
+<!-- Button trigger modal -->
+<button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="showFinalizeButton" @click.prevent="submitResp">
+  Launch demo modal
+</button>
+    </div>
+
+    <p></p>
+  </div>
+  <!-- Fin de sondage!-->
+
+
+  <!-- fenetre modal pour afficher le pop up!-->
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Merci d'avoir participer a ce sondage</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Toute l'équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+votre investissement, nous vous préparons une application toujours plus facile
+à utiliser, seul ou en famille.
+Si vous désirez consulter vos réponses ultérieurement, vous pouvez consultez
+  cette adresse: <router-link :to="`/checkoutresponse/${link_url}`">https://www.Bigscreen.com/{{link_url}}</router-link> </p>
+      </div>
+      
     </div>
   </div>
+</div>
+ <!--  Fin fenetre modal pour afficher le pop up!-->
 </template>
 
 <style>

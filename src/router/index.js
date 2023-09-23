@@ -6,32 +6,32 @@ const router = createRouter({
   routes: [
     {
       path: '/administration',
-      name: 'Login',
+      name: 'login',
       component: () => import('../views/Login.vue')
     },
 
     {
-      path: '/Dashboard',
-      name: 'Dashboard',
+      path: '/dashboard',
+      name: 'dashboard',
       component: () => import('../views/Dashboard.vue')
     },
 
     {
-      path: '/DashboardQuestion',
-      name: 'DashboardQuestion',
+      path: '/dashboardquestion',
+      name: 'dashboardquestion',
       component: () => import('../views/DashboardQuestion.vue')
     },
 
     {
-      path: '/DashboardResponse',
-      name: 'DashboardResponse',
+      path: '/dashboardresponse',
+      name: 'dashboardresponse',
       component: () => import('../views/DashboardResponse.vue')
     },
 
 
     {
-      path: '/Survey',
-      name: 'Survey',
+      path: '/survey',
+      name: 'survey',
       component: () => import('../views/Survey.vue')
     },
 
@@ -39,6 +39,12 @@ const router = createRouter({
       path: '/question',
       name: 'question',
       component: () => import('../components/Question.vue')
+    },
+
+    {
+      path: '/checkoutresponse/:code',
+      name: 'checkoutresponse',
+      component: () => import('../views/CheckoutResponse.vue')
     }
   ]
 })
