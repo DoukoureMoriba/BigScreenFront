@@ -23,6 +23,31 @@ async getResponse() {
 },
 
 
+    //Function pour la déconnexion de l'admin
+    async logout() {
+      var url = "http://127.0.0.1:8000/api/logout";
+      fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((Response) => {
+          return Response.json();
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.status == "Done") {
+            alert("Utilisateur déconnecté");
+            this.$router.push("/"); // Redirection vers la route "welcome.vue"
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+
+
 
     },
 
@@ -38,10 +63,11 @@ async getResponse() {
 <template>
     <main class="d-flex" >
 
-  <div class="d-flex flex-column mysidebar p-3 text-white bg-dark" style="width: 280px; height:100vh;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">Bigscreen</span>
+  <div class="d-flex flex-column mysidebar p-3 text-white bg-dark"
+      style="width: 280px; height: 100vh; position: fixed; overflow-y: auto;">
+    <a href="dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <img src="img/capsule_616x353.jpg" alt="logo" style="height:20px;width:50px;">
+      <span class="fs-4">  &nbsp; Bigscreen</span>
     </a>
     <hr>
     
@@ -76,7 +102,7 @@ async getResponse() {
 
   </div>
 
-  <div class="content p-3">
+  <div  class="content p-3" style="margin-left: 280px;">
       <div v-for="(userResponses, userId) in answers" :key="userId">
         <h2 class="text-white">Utilisateur : {{ userResponses.responses[0].user_response }}</h2> <!-- numérotation de l'utilisateur par l'e-mail !-->
         <table class="table">
@@ -114,6 +140,11 @@ body {
 main, .content {
     width: 100%;
     height: 100%;
+
+     background-image: url(img/display-top.webp);
+   height: 100vh;
+    background-position: center;
+    background-size: cover;
 }
 
 </style>

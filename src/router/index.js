@@ -4,6 +4,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+
+    {
+      path: '/',
+      name: 'welcome',
+      component: () => import('../views/Welcome.vue')
+    },
     {
       path: '/administration',
       name: 'login',
@@ -45,7 +51,9 @@ const router = createRouter({
       path: '/checkoutresponse/:code',
       name: 'checkoutresponse',
       component: () => import('../views/CheckoutResponse.vue')
-    }
+    },
+
+    
   ]
 })
 

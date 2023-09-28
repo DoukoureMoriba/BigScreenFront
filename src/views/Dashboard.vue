@@ -33,15 +33,14 @@ export default {
           console.error(error);
         });
     },
+
   },
 
     
 
-
-
-
-
 }
+
+
 </script>
 
 
@@ -51,9 +50,9 @@ export default {
   <h1 class="visually-hidden">Sidebars examples</h1>
 
   <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height:100vh;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">Bigscreen</span>
+    <a href="dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <img src="img/capsule_616x353.jpg" alt="logo" style="height:20px;width:50px;">
+      <span class="fs-4">  &nbsp; Bigscreen</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -78,26 +77,33 @@ export default {
       
     </ul>
     <hr>
-    <div class="dropdown">
-      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
-      </a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <button @click="logout()" class="btn">Se deconnecter</button>
-      </ul>
-    </div>
+
+    <button @click="logout()" class="btn text-white">Se deconnecter</button>
+
   </div>
+
+  <div class="d-flex">
+  <canvas id="myChart"></canvas>
+  <canvas id="myChart"></canvas>
+</div>
+
+
+
+
+
 
    </main>
 </template>
 
 <style>
 
+body {
+    background-color: #172438;
+    font-family: Arial, sans-serif;
+background-image: url(img/display-top.webp);   height: 100vh;
+    background-position: center;
+    background-size: cover;
+}
 
 
 </style>

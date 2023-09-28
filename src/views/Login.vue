@@ -44,7 +44,7 @@ export default {
 
 <template>
   <div class="login-box">
-    <h2>Big Screen</h2>
+    <h2>BigScreen</h2>
     <form @submit.prevent="login()">
       <!--retire l'action par defaut que le formulaire effectue-->
       <div class="user-box">
@@ -86,7 +86,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: linear-gradient(#141e30, #243b55);
+  background-image: url(img/bigscreen_vr_light_headset.png);
+   height: 100vh;
+    background-position: center;
+    background-size: cover;
 }
 
 .login-box {

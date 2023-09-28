@@ -20,6 +20,32 @@ export default {
     },
 
 
+    //Function pour la déconnexion de l'admin
+    async logout() {
+      var url = "http://127.0.0.1:8000/api/logout";
+      fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((Response) => {
+          return Response.json();
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.status == "Done") {
+            alert("Utilisateur déconnecté");
+            this.$router.push("/"); // Redirection vers la route "welcome.vue"
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+
+
+
     },
 
 
@@ -32,12 +58,13 @@ export default {
 </script>
 
 <template>
-    <main class="d-flex" >
+    <main class="d-flex " >
 
-  <div class="d-flex flex-column mysidebar p-3 text-white bg-dark" style="width: 280px; height:100vh;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">Bigscreen</span>
+  <div class="d-flex flex-column mysidebar p-3 text-white bg-dark"
+      style="width: 280px; height: 100vh; position: fixed; overflow-y: auto;">
+    <a href="dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <img src="img/capsule_616x353.jpg" alt="logo" style="height:20px;width:50px;">
+      <span class="fs-4">  &nbsp; Bigscreen</span>
     </a>
     <hr>
     
@@ -73,9 +100,10 @@ export default {
   </div>
 
 
-  <div  class="content p-3"> 
-
-    <table class="table">
+  <div class="content p-3" style="margin-left: 280px;"> 
+     <h1 class="display-4 mb-4  text-white ">Liste des questions</h1>
+     <div class="table-responsive">
+    <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">Numéro de la question</th>
@@ -91,6 +119,7 @@ export default {
     </tr>
   </tbody>
 </table>
+</div>
 
 
   </div>
@@ -104,12 +133,13 @@ export default {
 
 body {
     background-color: #172438;
+    font-family: Arial, sans-serif;
+background-image: url(img/display-top.webp);   height: 100vh;
+    background-position: center;
+    background-size: cover;
 }
 
 
-main, .content {
-    width: 100%;
-    height: 100%;
-}
+/* Style pour les écrans de petite taille (mobile) */
 
 </style>

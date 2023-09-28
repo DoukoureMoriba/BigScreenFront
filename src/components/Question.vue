@@ -19,7 +19,7 @@ export default {
   methods: {
     // Fonction pour récuperer la liste des questions des que l'utilisateur charge la page.
 
-async getQuestion()  {
+async getQuestion() {
       var url = "http://127.0.0.1:8000/api/questionList";
       var res = await(await fetch(url, {
          method: "GET",
@@ -71,6 +71,7 @@ async getQuestion()  {
     // Gérer le cas où this.answers est vide
     console.log("Aucune réponse n'a été enregistrée.");
   }
+
 },
 
 
@@ -100,6 +101,19 @@ async getQuestion()  {
     this.showFinalizeButton = true;
   }
 },
+
+// Fonction pour revenir à la question précédente
+  previousQuestion() {
+    if (this.index > 0) {
+      this.index--; // Décrémente l'index pour revenir à la question précédente
+      this.displayCurrentQuestion();
+      this.showNextButton = true; // Réaffiche le bouton "Next Question"
+      this.showFinalizeButton = false; // Masque le bouton "Finalisez"
+    } else {
+      // Si l'utilisateur est déjà sur la première question, vous pouvez gérer cela comme vous le souhaitez, par exemple, afficher un message d'erreur.
+      console.log("Vous êtes déjà sur la première question.");
+    }
+  },
 
     saveResponse() {
     // Création d'objet pour stocker la réponse de l'utilisateur
@@ -155,12 +169,15 @@ continuerVersQuestionSuivante() {
 
 <template>
   <header>
-    <div>
-      <!-- Logo a rentrer dans cette div------>
-    </div>
+    <a href="question" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+<img src="img/capsule_616x353.jpg" alt="logo" style="height:50px;width:100px;">
+    </a>
   </header>
 
 <!-- Début de sondage!-->
+
+
+
   <div class="container-question">
     <div class="question_header">
        <h2 class="text-center title_question"> {{ currentQuestion.title }} </h2>
@@ -181,18 +198,21 @@ continuerVersQuestionSuivante() {
       </div>
       <!-- question de type C-->
       <div class="containerTypeC" v-if="currentQuestion.question_type=='C'">
-        <input type="number" v-model="C">
+        <input type="number" max="5" min="1" v-model="C">
       </div>
     </div>
 
     <div class="question_footer">
+      <button class="arrow-prev" @click="previousQuestion">
+    <i class="fa-solid fa-arrow-left"></i> 
+  </button>
       <button class="arrow-next"  @click="saveResponse" v-if="showNextButton">
         <i class="fa-solid fa-arrow-right"></i>
       </button>
 <!-- <button type="submit" v-if="showFinalizeButton" @click.prevent="submitResp" >Finalisez</button> -->
 <!-- Button trigger modal -->
-<button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="showFinalizeButton" @click.prevent="submitResp">
-  Launch demo modal
+<button type="submit" class="btn btn-primary m-2"  data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="showFinalizeButton" @click.prevent="submitResp">
+  Finalisez
 </button>
     </div>
 
@@ -231,6 +251,13 @@ body {
   box-sizing: border-box;
   background-color: black;
 }
+body {
+  background-image: url(img/display-oled.webp);
+   height: 100vh;
+    background-position: center;
+    background-size: cover;
+
+}
 .container-question {
   position: relative;
   padding: 15px;
@@ -253,5 +280,46 @@ body {
   border-radius: 100%;
   top: 430px;
   left: 90%;
+}
+
+.arrow-prev i {
+  color: #fff;
+}
+.arrow-prev {
+   background-color: #000;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  top: 430px;
+  right: 90%;
+}
+
+/** Affichage pour les écrans de taille moyenne (mobile) */
+@media (max-width: 767px) {
+    .container-question {
+      display: block;
+      height: 320px;
+      width: 350px;
+    }
+
+    .arrow-next {
+  background-color: #000;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  top: 250px;
+  left: 80%;
+}
+.arrow-prev {
+   background-color: #000;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  top: 250px;
+  right: 80%;
+}
 }
 </style>
