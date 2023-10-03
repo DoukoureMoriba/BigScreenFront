@@ -1,20 +1,16 @@
 <script>
-
 export default {
-  
-    data() {
-        return {
-            quest6:[],
-            quest7:[],
-            quest10:[],
-        }
-    },
+  data() {
+    return {
+      quest6: [],
+      quest7: [],
+      quest10: [],
+      average: [],
+    };
+  },
 
-
-    methods: {
-        
-
-        //Function pour la déconnexion de l'admin
+  methods: {
+    //Function pour la déconnexion de l'admin
     async logout() {
       var url = "http://127.0.0.1:8000/api/logout";
       fetch(url, {
@@ -38,44 +34,55 @@ export default {
         });
     },
 
-    
-
-// fonction pour récuperer le nombre de réponse de la questions6
+    // fonction pour récuperer le nombre de réponse de la questions6
     async getPieCharts() {
-  try {
-    var url = "http://127.0.0.1:8000/api/PieCharts";
-    var res = await (await fetch(url, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })).json();
-    if (res.status === "Done" && res.question6) {
-      this.quest6 = res.question6;
-      // Reste du code pour créer le diagramme
-    } else {
-      console.error("Erreur lors de la récupération des données ou données manquantes.");
-    }
-  } catch (error) {
-    console.error("Une erreur s'est produite lors de la récupération des données :", error);
-  }
-},
+      try {
+        var url = "http://127.0.0.1:8000/api/PieCharts";
+        var res = await (
+          await fetch(url, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          })
+        ).json();
+        if (res.status === "Done" && res.question6) {
+          this.quest6 = res.question6;
+          // Reste du code pour créer le diagramme
+        } else {
+          console.error(
+            "Erreur lors de la récupération des données ou données manquantes."
+          );
+        }
+      } catch (error) {
+        console.error(
+          "Une erreur s'est produite lors de la récupération des données :",
+          error
+        );
+      }
+    },
 
-
-  // Fonction pour récupérer le nombre de réponses de la question 7
+    // Fonction pour récupérer le nombre de réponses de la question 7
     async getPieCharts7() {
       try {
         var url = "http://127.0.0.1:8000/api/PieCharts7"; // Remplacez par l'URL correcte
-        var res = await (await fetch(url, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        })).json();
+        var res = await (
+          await fetch(url, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          })
+        ).json();
         if (res.status === "Done" && res.question7) {
           this.quest7 = res.question7;
           // Reste du code pour créer le diagramme
         } else {
-          console.error("Erreur lors de la récupération des données ou données manquantes.");
+          console.error(
+            "Erreur lors de la récupération des données ou données manquantes."
+          );
         }
       } catch (error) {
-        console.error("Une erreur s'est produite lors de la récupération des données :", error);
+        console.error(
+          "Une erreur s'est produite lors de la récupération des données :",
+          error
+        );
       }
     },
 
@@ -92,19 +99,24 @@ export default {
         ],
       };
 
-      // Options du diagramme
-      const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            labels: {
-              font: {
-                size: 25, // Taille de la police des libellés
-              },
-            },
+        // Options du diagramme
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 12, // Taille de la police des libellés
           },
         },
-      };
+      },
+      title: {
+        display: true,
+        text: "Diagramme Pie Chart 7", // Titre du diagramme
+        fontSize: 16, // Taille de la police du titre
+      },
+    },
+  };
 
       // Créer le diagramme en secteurs pour myPieChart7
       const ctx = document.getElementById("myPieChart7");
@@ -115,52 +127,53 @@ export default {
       });
     },
 
-
-
-  // Fonction pour récupérer le nombre de réponses de la question 10
+    // Fonction pour récupérer le nombre de réponses de la question 10
     async getPieCharts10() {
       try {
         var url = "http://127.0.0.1:8000/api/PieCharts10";
-        var res = await (await fetch(url, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        })).json();
+        var res = await (
+          await fetch(url, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          })
+        ).json();
         if (res.status === "Done" && res.question10) {
           const quest10 = res.question10;
           // Données pour le diagramme en secteurs de la question 10
           const data = {
             labels: [
               "Regarder des films",
-              "Travailler, jouer en solo",
+              "Travailler",
+              "jouer en solo",
               "Regarder la TV en direct",
               "Jouer en équipe",
             ],
             datasets: [
               {
                 data: Object.values(quest10),
-                backgroundColor: [
-                  "#FF5733",
-                  "#33FF57",
-                  "#5733FF",
-                  "#CA6F1E",
-                ],
+                backgroundColor: ["#FF5733", "#33FF57", "#5733FF", "#CA6F1E"],
               },
             ],
           };
 
-          // Options du diagramme
-          const options = {
-            responsive: true,
-            plugins: {
-              legend: {
-                labels: {
-                  font: {
-                    size: 25, // Augmentez la taille de la police des labels ici
-                  },
-                },
-              },
-            },
-          };
+            // Options du diagramme
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 12, // Taille de la police des libellés
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: "Diagramme Pie Chart 10", // Titre du diagramme
+        fontSize: 16, // Taille de la police du titre
+      },
+    },
+  };
 
           // Créer le diagramme en secteurs
           const ctx = document.getElementById("myPieChart10");
@@ -180,59 +193,149 @@ export default {
           error
         );
       }
+    },
+
+    // Fonction pour récupérer le nombre de réponses de la question 11 a 15
+    
+
+    // Fonction pour récupérer le nombre de réponses de la question 11 a 15
+async getRadarCharts() {
+  try {
+    var url = "http://127.0.0.1:8000/api/radarCharts";
+    var res = await (
+      await fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      })
+    ).json();
+    if (res.status === "Done" && res.average) {
+      const average = res.average;
+      // Données pour le diagramme en secteurs de la question 10
+      const data = {
+        labels: [
+          "qualité de l'image",
+          "confort d'utilisation",
+          "connexion réseau",
+          "qualité des graphismes 3D",
+          "qualité audio",
+        ],
+        datasets: [
+          {
+            data: Object.values(average),
+            backgroundColor: "rgba(255, 87, 51, 0.2)",
+            borderColor: "#000",
+            borderWidth: 2,
+          },
+        ],
+      };
+
+      // Options du diagramme
+      const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 30, // Augmentez la taille de la police des labels ici
+              },
+            },
+          },
+          title: {
+            display: true,
+            text: "Diagramme Radar Charts 11-15", // Titre du diagramme
+            fontSize: 16, // Taille de la police du titre
+          },
+        },
+        scale: {
+          pointLabels: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+      };
+
+      // Créer le diagramme radar pour myRadarChart11_15
+      const ctx = document.getElementById("myRadarChart11_15");
+      new Chart(ctx, {
+        type: "radar",
+        data: data,
+        options: options,
+      });
+    } else {
+      console.error(
+        "Erreur lors de la récupération des données ou données manquantes."
+      );
     }
+  } catch (error) {
+    console.error(
+      "Une erreur s'est produite lors de la récupération des données :",
+      error
+    );
+  }
+},
+
 
 
   },
 
-
-    
-
-   
-
-async mounted() {
-   // Diagramme pieCharts de la question 6 
-  await this.getPieCharts();// Appellons la fonction async de Recuperation du nombre de réponse de la questions6
-  console.log(Object.values(this.quest6));
+  async mounted() {
+    // Diagramme pieCharts de la question 6
+    await this.getPieCharts(); // Appellons la fonction async de Recuperation du nombre de réponse de la questions6
+    console.log(Object.values(this.quest6));
     // Données pour le diagramme en secteurs
     const data = {
-      labels:["Oculus Rift\/s",	"Windows Mixed\n Reality","Oculus Quest","Valve index","HTC Vive"], // Utilisez les clés comme labels
-      datasets: [{
-      data: Object.values(this.quest6), // Utilisez les valeurs comme données
-      backgroundColor: ["#FF5733", "#33FF57", "#5733FF", "#CA6F1E", "#117864"] // Couleurs des secteurs
-
-      }]
+      labels: [
+        "Oculus Rift/s",
+        "Windows Mixed Reality",
+        "Oculus Quest",
+        "Valve index",
+        "HTC Vive",
+      ], // Utilisez les clés comme labels
+      datasets: [
+        {
+          data: Object.values(this.quest6), // Utilisez les valeurs comme données
+          backgroundColor: [
+            "#FF5733",
+            "#33FF57",
+            "#5733FF",
+            "#CA6F1E",
+            "#117864",
+          ], // Couleurs des secteurs
+        },
+      ],
     };
 
-    // Options du diagramme
-    const options = {
-      responsive: true,
-        plugins: {
-        legend: {
-          labels: {
-            font: {
-              size: 25, // Augmentez la taille de la police des labels ici
-             
-            }
-          }
-        }
-      }
-    
-    };
+      // Options du diagramme
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 12, // Taille de la police des libellés
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: "Diagramme Pie Chart 6", // Titre du diagramme
+        fontSize: 16, // Taille de la police du titre
+      },
+    },
+  };
+
 
     // Créer le diagramme en secteurs
     const ctx = document.getElementById("myPieChart6");
     new Chart(ctx, {
-      type: 'pie',
+      type: "pie",
       data: data,
       options: options,
     });
 
-
-
-
-  // Diagramme pieCharts de la question 7   
- // Appel de la méthode pour récupérer les données de la question 7
+    // Diagramme pieCharts de la question 7
+    // Appel de la méthode pour récupérer les données de la question 7
     await this.getPieCharts7();
     console.log(Object.values(this.quest7));
     // Appel de la méthode pour créer le diagramme de myPieChart7
@@ -240,78 +343,81 @@ async mounted() {
 
     // Diagramme pieCharts de la question 10
     await this.getPieCharts10(); // Appel de la fonction async pour récupérer le nombre de réponses de la question 10
-  
-  }
 
-
-
+    // on appel la fonction pour les questions 11 a 15
+    await this.getRadarCharts();
+  },
 };
-
-
-
-
 </script>
 
 
 <template>
-    
-<main class="d-flex">
- 
+  <main class="d-flex">
+    <div
+      class="d-flex flex-column mysidebar p-3 text-white bg-dark"
+      style="width: 280px; height: 100vh; position: fixed; left: 0"
+    >
+      <a
+        href="dashboard"
+        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        style="x"
+      >
+       <img src="img/capsule_616x353.jpg" alt="logo" style="height:20px;width:50px;"> 
+      <span class="fs-4">  &nbsp; Bigscreen</span>
+      </a>
+      <hr />
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a
+            href="/Dashboard"
+            class="nav-link text-white active"
+            aria-current="page"
+          >
+            <i class="fa-solid fa-house"><use xlink:href="#home" /></i>
+            Acceuil
+          </a>
+        </li>
+        <li>
+          <a href="/DashboardQuestion" class="nav-link text-white">
+            <i class="fa-solid fa-square-poll-horizontal"></i
+            ><use xlink:href="#speedometer2" />
+            Questionnaire
+          </a>
+        </li>
+        <li>
+          <a href="/DashboardResponse" class="nav-link text-white">
+            <i class="fa-solid fa-voicemail"></i><use xlink:href="#table" />
+            Réponses
+          </a>
+        </li>
+      </ul>
+      <hr />
 
-    <div class="d-flex flex-column mysidebar p-3 text-white bg-dark" style="width: 280px; height: 100vh; position: fixed; left: 0;">
-    <a href="dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" style="x">
-      <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">Sidebar</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="/Dashboard" class="nav-link  text-white active" aria-current="page">
-          <i class="fa-solid fa-house"><use xlink:href="#home"/></i>
-          Acceuil
-        </a>
-      </li>
-      <li>
-        <a href="/DashboardQuestion" class="nav-link text-white">
-          <i class="fa-solid fa-square-poll-horizontal"></i><use xlink:href="#speedometer2"/>
-          Questionnaire
-        </a>
-      </li>
-      <li>
-        <a href="/DashboardResponse" class="nav-link text-white">
-          <i class="fa-solid fa-voicemail"></i><use xlink:href="#table"/>
-          Réponses
-        </a>
-      </li>
-      
-    </ul>
-    <hr>
+      <button @click="logout()" class="btn text-white">Se deconnecter</button>
 
-    <button @click="logout()" class="btn text-white">Se deconnecter</button>
+        
 
-  </div> 
 
-   <div class="d-flex flex-wrap wrapper_chart">
-      <canvas id="myPieChart6" class="chart"></canvas>
-      <canvas id="myPieChart7" class="chart"></canvas>
-      <canvas id="myPieChart10" class="chart"></canvas>
-      <canvas id="myRadarChart11_15" class="chart"></canvas>
     </div>
 
 
 
-
-
-
-   </main>
+    <div class="d-flex flex-wrap wrapper_chart">
+    <div style="background-color:white;"> <canvas id="myPieChart6" class="chart m-4 p-4"> </canvas> </div>
+     <div style="background-color:white;"> <canvas id="myPieChart7" class="chart m-4 p-4"></canvas></div>
+     <div style="background-color:white;">  <canvas id="myPieChart10" class="chart m-4 p-4"></canvas></div>
+      <div style="background-color:white;">
+        <canvas id="myRadarChart11_15" class="chart m-4 p-4"></canvas>
+      </div>
+    </div>
+  </main>
 </template>
 
 <style>
-
 body {
-  background-color: #172438;
+  background-color: #fff;
   font-family: Arial, sans-serif;
-  background-image: url(img/display-top.webp);
+  /* background-image: url(img/display-top.webp); */
   height: 100vh;
   background-position: center;
   background-size: cover;
@@ -330,5 +436,4 @@ body {
   width: 300px !important;
   height: 300px !important;
 }
-
 </style>

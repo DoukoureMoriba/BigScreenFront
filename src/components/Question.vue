@@ -187,7 +187,7 @@ continuerVersQuestionSuivante() {
     <div class="question_main">
       <center> 
       <!-- question de type A-->
-      <div class="containerTypeA" v-if="currentQuestion.question_type=='A'">
+      <div style="list-style:none" class="containerTypeA" v-if="currentQuestion.question_type=='A'">
        <li v-for=" index in currentQuestion.propositions" :key="index">
        <input type="radio" v-model="A" :value="index">{{ index }}
       </li>
@@ -203,7 +203,10 @@ continuerVersQuestionSuivante() {
       <!-- question de type C-->
       <center>
       <div class="containerTypeC p-3" v-if="currentQuestion.question_type=='C'">
-        <input type="number" max="5" min="1" v-model="C">
+        
+        <li style="list-style:none" v-for=" index in [1,2,3,4,5]" :key="index">
+       <input type="radio" v-model="C" :value="index">{{ index }}
+      </li>
       </div>
        </center>
     </div>
@@ -268,7 +271,7 @@ body {
   position: relative;
   padding: 15px;
   background-color: white;
-  height: 500px;
+  height: 453px;
   width: 650px;
   border-radius: 10px;
   margin: 50px auto;
@@ -284,7 +287,7 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 100%;
-  top: 430px;
+  top: 400px;
   left: 90%;
 }
 
@@ -297,8 +300,12 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 100%;
-  top: 430px;
+  top: 400px;
   right: 90%;
+}
+
+.question_header {
+  color:black;
 }
 
 /** Affichage pour les écrans de taille moyenne (mobile) */
