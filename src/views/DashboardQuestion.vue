@@ -134,7 +134,8 @@ export default {
 body {
     background-color: #172438;
     font-family: Arial, sans-serif;
-background-image: url(img/display-top.webp);   height: 100vh;
+background-image: url(img/display-top.webp); 
+  height: 100vh;
     background-position: center;
     background-size: cover;
 }

@@ -185,6 +185,7 @@ continuerVersQuestionSuivante() {
     </div>
 
     <div class="question_main">
+      <center> 
       <!-- question de type A-->
       <div class="containerTypeA" v-if="currentQuestion.question_type=='A'">
        <li v-for=" index in currentQuestion.propositions" :key="index">
@@ -192,18 +193,23 @@ continuerVersQuestionSuivante() {
       </li>
 
       </div>
+      </center>
       <!-- question de type B-->
-      <div class="containerTypeB" v-if="currentQuestion.question_type=='B'">
+      <center> 
+      <div class="containerTypeB p-3" v-if="currentQuestion.question_type=='B'">
         <input type="text" v-model="B">
       </div>
+      </center>
       <!-- question de type C-->
-      <div class="containerTypeC" v-if="currentQuestion.question_type=='C'">
+      <center>
+      <div class="containerTypeC p-3" v-if="currentQuestion.question_type=='C'">
         <input type="number" max="5" min="1" v-model="C">
       </div>
+       </center>
     </div>
 
-    <div class="question_footer">
-      <button class="arrow-prev" @click="previousQuestion">
+    <div class="question_footer p-3">
+      <button class="arrow-prev " @click="previousQuestion">
     <i class="fa-solid fa-arrow-left"></i> 
   </button>
       <button class="arrow-next"  @click="saveResponse" v-if="showNextButton">
