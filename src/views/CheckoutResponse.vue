@@ -27,7 +27,7 @@ export default {
 
 <template>
   <div v-for="a in answer" :key="a.id">
-    <h3>Question {{ a.response_id + 1 }}/20</h3>
+    <h3>Question {{ a.response_id + 0 }}/20</h3>
     <h4>{{ a.question_body }}</h4>
     <p>Réponse donnée : {{ a.user_response }}</p>
   </div>
