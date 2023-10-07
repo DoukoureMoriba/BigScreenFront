@@ -1,29 +1,28 @@
 <script>
 export default {
-    data() {
-        return {
-            answers: [],
-        }
+  data() {
+    return {
+      answers: [],
+      showScrollTopButton: false, // J'utilise cette variable pour afficher ou masquer le bouton de retour en haut
+    };
+  },
+
+  methods: {
+    // J'utilise cette fonction pour récupérer les réponses depuis l'API
+    async getResponse() {
+      var url = "http://127.0.0.1:8000/api/responseList";
+      var res = await (await fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      })).json();
+      console.log("Réponse de l'API :", res); // Je débogue la réponse de l'API
+      if (res.status === "Done") {
+        this.answers = res.data; // Je récupère les réponses groupées par utilisateur
+        console.log("Données traitées :", this.answers); // Je débogue les données traitées
+      }
     },
 
-    methods: {
-
-        
-async getResponse() {
-  var url = "http://127.0.0.1:8000/api/responseList";
-  var res = await (await fetch(url, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  })).json();
-  console.log("Réponse de l'API :", res); // Déboguer la réponse de l'API
-  if (res.status === "Done") {
-    this.answers = res.data; // Récupération des réponses groupées par utilisateur
-    console.log("Données traitées :", this.answers); // Déboguer les données traitées
-  }
-},
-
-
-    //Function pour la déconnexion de l'admin
+    // J'utilise cette fonction pour déconnecter l'administrateur
     async logout() {
       var url = "http://127.0.0.1:8000/api/logout";
       fetch(url, {
@@ -39,7 +38,7 @@ async getResponse() {
           console.log(res);
           if (res.status == "Done") {
             alert("Utilisateur déconnecté");
-            this.$router.push("/"); // Redirection vers la route "welcome.vue"
+            this.$router.push("/"); // Je redirige vers la route "welcome.vue"
           }
         })
         .catch((error) => {
@@ -47,64 +46,71 @@ async getResponse() {
         });
     },
 
-
-
+    // J'utilise cette méthode pour faire défiler vers le haut de la page
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     },
 
+    // J'utilise cette méthode pour afficher/masquer le bouton de retour en haut en fonction de la position de défilement
+    handleScroll() {
+      if (window.scrollY > 100) {
+        this.showScrollTopButton = true;
+      } else {
+        this.showScrollTopButton = false;
+      }
+    },
+  },
 
+  mounted() {
+    this.getResponse();
 
- mounted() {
-   this.getResponse(); 
-},
+    // J'ajoute un gestionnaire d'événements de défilement pour afficher/masquer le bouton de retour en haut
+    window.addEventListener('scroll', this.handleScroll);
+  },
 
-}
+  // J'utilise cette fonction pour supprimer l'écouteur d'événements lorsque le composant est détruit
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+};
 </script>
 
 <template>
-    <main class="d-flex" >
-
-  <div class="d-flex flex-column mysidebar p-3 text-white bg-dark"
+  <main class="d-flex">
+    <div class="d-flex flex-column mysidebar p-3 text-white bg-dark"
       style="width: 280px; height: 100vh; position: fixed; overflow-y: auto;">
-    <a href="dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <img src="img/capsule_616x353.jpg" alt="logo" style="height:20px;width:50px;">
-      <span class="fs-4">  &nbsp; Bigscreen</span>
-    </a>
-    <hr>
-    
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="/Dashboard" class="nav-link text-white " aria-current="page">
-          <i class="fa-solid fa-house"><use xlink:href="#home"/></i>
-          Acceuil
-        </a>
-      </li>
-      <li>
-        <a href="/DashboardQuestion" class="nav-link text-white ">
-          <i class="fa-solid fa-square-poll-horizontal"></i><use xlink:href="#speedometer2"/>
-          Questionnaire
-        </a>
-      </li>
-      <li>
-        <a href="/DashboardResponse" class="nav-link text-white active">
-          <i class="fa-solid fa-voicemail"></i><use xlink:href="#table"/>
-          Réponses
-        </a>
-      </li>
-      
-    </ul>
+      <a href="dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <img src="img/capsule_616x353.jpg" alt="logo" style="height:20px;width:50px;">
+        <span class="fs-4">  &nbsp; Bigscreen</span>
+      </a>
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="/Dashboard" class="nav-link text-white " aria-current="page">
+            <i class="fa-solid fa-house"><use xlink:href="#home"/></i>
+            Acceuil
+          </a>
+        </li>
+        <li>
+          <a href="/DashboardQuestion" class="nav-link text-white ">
+            <i class="fa-solid fa-square-poll-horizontal"></i><use xlink:href="#speedometer2"/>
+            Questionnaire
+          </a>
+        </li>
+        <li>
+          <a href="/DashboardResponse" class="nav-link text-white active">
+            <i class="fa-solid fa-voicemail"></i><use xlink:href="#table"/>
+            Réponses
+          </a>
+        </li>
+      </ul>
+      <hr>
+      <button @click="logout()" class="btn text-white">Se déconnecter</button>
+    </div>
 
-    <hr>
-
-
-    <button @click="logout()" class="btn text-white">Se deconnecter</button>
-
-    
-
-  </div>
-
-  <div  class="content p-3" style="margin-left: 280px;">
+    <div  class="content p-3" style="margin-left: 280px;">
       <div v-for="(userResponses, userId) in answers" :key="userId">
-        <h2 class="text-white">Utilisateur : {{ userResponses.responses[0].user_response }}</h2> <!-- numérotation de l'utilisateur par l'e-mail !-->
+        <h2 class="text-white">Utilisateur : {{ userResponses.responses[0].user_response }}</h2> <!-- Je numérote l'utilisateur par l'e-mail -->
         <table class="table">
           <thead>
             <tr>
@@ -122,31 +128,25 @@ async getResponse() {
           </tbody>
         </table>
       </div>
+      <!-- Bouton de retour en haut -->
+      <button @click="scrollToTop" class="btn btn-primary btn-scroll-top" v-show="showScrollTopButton">
+        <i class="fa-solid fa-chevron-up"></i>
+      </button>
     </div>
-
-
-   </main>
-   
+  </main>
 </template>
 
-<style>
-
-
+<style >
 body {
-    background-color: #172438;
+  background-color: #172438;
 }
-
 
 main, .content {
-    width: 100%;
-    height: 100%;
-
-     background-image: url(img/display-top.webp);
-   height: 100vh;
-    background-position: center;
-    background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-image: url(img/display-top.webp);
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
 }
-
 </style>
-
-

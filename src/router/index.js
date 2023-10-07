@@ -35,11 +35,6 @@ const router = createRouter({
     },
 
 
-    {
-      path: '/survey',
-      name: 'survey',
-      component: () => import('../views/Survey.vue')
-    },
 
     {
       path: '/question',

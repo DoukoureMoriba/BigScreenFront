@@ -2,17 +2,17 @@
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      email: "", // Je stocke l'adresse e-mail de l'utilisateur
+      password: "", // Je stocke le mot de passe de l'utilisateur
     };
   },
   methods: {
-    //la fonction login me permet d'envoyer des informations de mon formulaire afin de connecter l'amdin
+    // Cette fonction me permet d'envoyer les informations du formulaire pour connecter l'administrateur
     async login() {
       var url = "http://127.0.0.1:8000/api/login";
       var bodyContent = JSON.stringify({
-        email: this.email,
-        password: this.password,
+        email: this.email, // J'utilise l'adresse e-mail saisie par l'utilisateur
+        password: this.password, // J'utilise le mot de passe saisi par l'utilisateur
       });
       fetch(url, {
         method: "POST",
@@ -22,15 +22,15 @@ export default {
         .then((Response) => {
           return Response.json();
         })
-        // Res me permet de lire les informations renvoyer par mon json depuis l'api.
+        // Je lis les informations renvoyées par le serveur JSON depuis l'API.
         .then((res) => {
           console.log(res);
           if (res.status == "Done") {
-            alert(res.message);
-            this.$router.push("/Dashboard"); //Redirection vers la page du Dashboard
+            alert(res.message); // J'affiche un message de succès
+            this.$router.push("/Dashboard"); // Je redirige vers la page du tableau de bord
           } else {
-            alert("Impossible de vous connecter");
-            window.location.reload();
+            alert("Impossible de vous connecter"); // J'affiche un message d'erreur en cas d'échec de la connexion
+            window.location.reload(); // Je recharge la page en cas d'échec de la connexion
           }
         })
         .catch((error) => {
@@ -41,12 +41,11 @@ export default {
 };
 </script>
 
-
 <template>
   <div class="login-box">
     <h2>BigScreen</h2>
     <form @submit.prevent="login()">
-      <!--retire l'action par defaut que le formulaire effectue-->
+      <!-- J'empêche l'action par défaut du formulaire de s'exécuter -->
       <div class="user-box">
         <input
           v-model="email"
