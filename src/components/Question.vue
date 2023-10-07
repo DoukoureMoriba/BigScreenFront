@@ -165,7 +165,7 @@ export default {
 
   <!-- Début du sondage! -->
   <div class="container-question">
-    <div class="question_header">
+    <div class="question_header text-black">
       <h2 class="text-center title_question"> {{ currentQuestion.title }} </h2>
       <h4 class="text-center mt-3 body_question">{{ currentQuestion.question_body }}</h4>
     </div>
