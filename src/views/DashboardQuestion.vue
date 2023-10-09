@@ -35,7 +35,7 @@ export default {
         .then((res) => {
           console.log(res);
           if (res.status == "Done") {
-            alert("Utilisateur déconnecté");
+            alert("Vous avez été déconnecté en tant qu'administrateur.");
             this.$router.push("/"); // Redirection vers la route "welcome.vue"
           }
         })
@@ -141,6 +141,5 @@ background-image: url(img/display-top.webp);
 }
 
 
-/* Style pour les écrans de petite taille (mobile) */
 
 </style>

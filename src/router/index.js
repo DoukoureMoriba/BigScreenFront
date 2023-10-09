@@ -19,19 +19,64 @@ const router = createRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('../views/Dashboard.vue')
+      component: () => import('../views/Dashboard.vue'),
+
+      beforeEnter: (to, from, next) => {
+        // Vous pouvez mettre votre logique d'authentification ici
+        // Par exemple, vérifiez si l'utilisateur est authentifié en tant qu'admin
+        const isAdmin =  sessionStorage.getItem('est-t-il-connecter');/* Votre logique pour vérifier le rôle "admin" */
+        
+        if (isAdmin) {
+          // Si l'utilisateur est authentifié en tant qu'admin, autorisez l'accès
+          next();
+        } else {
+          // Sinon, redirigez-le vers la page de connexion ou une autre page appropriée
+          next('/administration');
+        }
+      }
+    
+
     },
 
     {
       path: '/dashboardquestion',
       name: 'dashboardquestion',
-      component: () => import('../views/DashboardQuestion.vue')
+      component: () => import('../views/DashboardQuestion.vue'),
+      beforeEnter: (to, from, next) => {
+        // Vous pouvez mettre votre logique d'authentification ici
+        // Par exemple, vérifiez si l'utilisateur est authentifié en tant qu'admin
+        const isAdmin =  sessionStorage.getItem('est-t-il-connecter');/* Votre logique pour vérifier le rôle "admin" */
+        
+        if (isAdmin) {
+          // Si l'utilisateur est authentifié en tant qu'admin, autorisez l'accès
+          next();
+        } else {
+          // Sinon, redirigez-le vers la page de connexion ou une autre page appropriée
+          next('/administration');
+        }
+      }
+    
     },
 
     {
       path: '/dashboardresponse',
       name: 'dashboardresponse',
-      component: () => import('../views/DashboardResponse.vue')
+      component: () => import('../views/DashboardResponse.vue'),
+      beforeEnter: (to, from, next) => {
+        // Vous pouvez mettre votre logique d'authentification ici
+        // Par exemple, vérifiez si l'utilisateur est authentifié en tant qu'admin
+        const isAdmin =  sessionStorage.getItem('est-t-il-connecter');/* Votre logique pour vérifier le rôle "admin" */
+        
+        if (isAdmin) {
+          // Si l'utilisateur est authentifié en tant qu'admin, autorisez l'accès
+          next();
+        } else {
+          // Sinon, redirigez-le vers la page de connexion ou une autre page appropriée
+          next('/administration');
+        }
+      }
+    
+
     },
 
 
@@ -48,8 +93,10 @@ const router = createRouter({
       component: () => import('../views/CheckoutResponse.vue')
     },
 
-    
+
   ]
+
+
 })
 
 export default router

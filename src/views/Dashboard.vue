@@ -6,6 +6,8 @@ export default {
       quest7: [],
       quest10: [],
       average: [],
+      isSidebarVisible: true, // Ajoutez cette propriété
+
     };
   },
 
@@ -25,7 +27,7 @@ export default {
         .then((res) => {
           console.log(res);
           if (res.status == "Done") {
-            alert("Je suis déconnecté.");
+            alert("Vous avez été déconnecté en tant qu'administrateur.");
             this.$router.push("/"); // Redirection vers la route "welcome.vue"
           }
         })
@@ -33,6 +35,19 @@ export default {
           console.error(error);
         });
     },
+
+     // Nouvelle méthode pour basculer la visibilité de la barre latérale
+  toggleSidebar() {
+  this.isSidebarVisible = !this.isSidebarVisible;
+
+  // Ajoute ou supprime la classe .d-none en fonction de isSidebarVisible
+  const sidebar = document.querySelector('.mysidebar');
+  if (this.isSidebarVisible) {
+    sidebar.classList.remove('d-none');
+  } else {
+    sidebar.classList.add('d-none');
+  }
+},
 
     // Fonction pour récupérer le nombre de réponses de la question 6
     async getPieCharts() {
@@ -196,7 +211,6 @@ export default {
     },
 
     // Fonction pour récupérer le nombre de réponses des questions 11 à 15
-    
 
     // Fonction pour récupérer le nombre de réponses des questions 11 à 15
     async getRadarCharts() {
@@ -348,17 +362,28 @@ export default {
 
 <template>
   <main class="d-flex">
+
+     <button @click="toggleSidebar" class="btn btn-primary toggle-button">
+     <i class="fa-solid fa-sliders"></i>
+    </button>
+
     <div
+    
       class="d-flex flex-column mysidebar p-3 text-white bg-dark"
-      style="width: 280px; height: 100vh; position: fixed; left: 0"
+      
+      style="width: 280px; height: 100vh; position: fixed; left:0"
     >
       <a
         href="dashboard"
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
         style="x"
       >
-       <img src="img/capsule_616x353.jpg" alt="logo" style="height:20px;width:50px;"> 
-      <span class="fs-4">  &nbsp; Bigscreen</span>
+        <img
+          src="img/capsule_616x353.jpg"
+          alt="logo"
+          style="height: 20px; width: 50px"
+        />
+        <span class="fs-4"> &nbsp; Bigscreen</span>
       </a>
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
@@ -389,14 +414,19 @@ export default {
       <hr />
 
       <button @click="logout()" class="btn text-white">Se déconnecter</button>
-
     </div>
 
     <div class="d-flex flex-wrap wrapper_chart">
-      <div style="background-color:white;"> <canvas id="myPieChart6" class="chart m-4 p-4"> </canvas> </div>
-      <div style="background-color:white;"> <canvas id="myPieChart7" class="chart m-4 p-4"></canvas></div>
-      <div style="background-color:white;">  <canvas id="myPieChart10" class="chart m-4 p-4"></canvas></div>
-      <div style="background-color:white;">
+      <div style="background-color: white">
+        <canvas id="myPieChart6" class="chart m-4 p-4"> </canvas>
+      </div>
+      <div style="background-color: white">
+        <canvas id="myPieChart7" class="chart m-4 p-4"></canvas>
+      </div>
+      <div style="background-color: white">
+        <canvas id="myPieChart10" class="chart m-4 p-4"></canvas>
+      </div>
+      <div style="background-color: white">
         <canvas id="myRadarChart11_15" class="chart m-4 p-4"></canvas>
       </div>
     </div>
@@ -411,18 +441,60 @@ body {
   background-position: center;
   background-size: cover;
   margin: 0;
+    overflow-x: hidden;
 }
 
 .wrapper_chart {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-left: 280px;
-  padding: 20px;
+margin-left: 180px;
+    padding: 21px;
 }
 
 .chart {
-  width: 300px !important;
-  height: 300px !important;
+  width: 300px;
+  height: 300px;
 }
+
+
+
+/* ... Vos autres styles ici ... */
+
+.mysidebar {
+  width: 280px;
+  /* Autres styles de la barre latérale */
+}
+
+/* Styles pour masquer la barre latérale lorsque isSidebarVisible est faux */
+.mysidebar.d-none {
+  display: none !important;
+  width: 0px !important;
+  height: 5px !important;
+}
+
+/* Styles pour ajuster la largeur du contenu principal */
+@media screen and (max-width: 600px) {
+  .wrapper_chart {
+margin-left: 0;
+justify-content: center;
+  }
+
+.toggle-button {
+  height: 55px !important;
+}
+
+  .mysidebar {
+    width: 100% !important;
+    position: static !important;
+    display: none !important;
+  }
+
+  /* Styles pour masquer la barre latérale lorsque isSidebarVisible est faux en mode mobile */
+  .mysidebar.d-none-mobile {
+    display: none !important;
+    width: 0px;
+  }
+}
+
 </style>

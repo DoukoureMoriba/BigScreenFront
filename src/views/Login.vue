@@ -26,6 +26,7 @@ export default {
         .then((res) => {
           console.log(res);
           if (res.status == "Done") {
+            sessionStorage.setItem('est-t-il-connecter',true);
             alert(res.message); // J'affiche un message de succès
             this.$router.push("/Dashboard"); // Je redirige vers la page du tableau de bord
           } else {

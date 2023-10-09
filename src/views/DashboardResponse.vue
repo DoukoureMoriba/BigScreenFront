@@ -37,7 +37,7 @@ export default {
         .then((res) => {
           console.log(res);
           if (res.status == "Done") {
-            alert("Utilisateur déconnecté");
+            alert("Vous avez été déconnecté en tant qu'administrateur.");
             this.$router.push("/"); // Je redirige vers la route "welcome.vue"
           }
         })
