@@ -60,44 +60,50 @@ export default {
 <template>
     <main class="d-flex " >
 
-  <div class="d-flex flex-column mysidebar p-3 text-white bg-dark"
-      style="width: 280px; height: 100vh; position: fixed; overflow-y: auto;">
-    <a href="dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <img src="img/capsule_616x353.jpg" alt="logo" style="height:20px;width:50px;">
-      <span class="fs-4">  &nbsp; Bigscreen</span>
-    </a>
-    <hr>
+  <div
     
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="/Dashboard" class="nav-link text-white " aria-current="page">
-          <i class="fa-solid fa-house"><use xlink:href="#home"/></i>
-          Acceuil
-        </a>
-      </li>
-      <li>
-        <a href="/DashboardQuestion" class="nav-link text-white active">
-          <i class="fa-solid fa-square-poll-horizontal"></i><use xlink:href="#speedometer2"/>
-          Questionnaire
-        </a>
-      </li>
-      <li>
-        <a href="/DashboardResponse" class="nav-link text-white">
-          <i class="fa-solid fa-voicemail"></i><use xlink:href="#table"/>
-          Réponses
-        </a>
-      </li>
+      class="d-flex flex-column mysidebar p-3 text-white bg-dark"
       
-    </ul>
+      style="width: 280px; height: 100vh; position: fixed; left:0"
+    >
+      <a
+        href="dashboard"
+        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        style="x"
+      >
+       <img src="img/capsule_616x353.jpg" alt="logo" style="height:20px;width:50px;">
+        <span class="fs-4 text-disap"> &nbsp; Bigscreen</span>
+      </a>
+      <hr />
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a
+            href="/Dashboard"
+            class="nav-link text-white "
+            aria-current="page"
+          >
+            <i class="fa-solid fa-house"></i>
+          <span class="text-disap"> Accueil</span>  
+          </a>
+        </li>
+        <li>
+          <a href="/DashboardQuestion" class="nav-link text-white active">
+            <i class="fa-solid fa-square-poll-horizontal "></i
+            >
+           <span class="text-disap"> Questionnaire</span> 
+          </a>
+        </li>
+        <li>
+          <a href="/DashboardResponse" class="nav-link text-white">
+            <i class="fa-solid fa-voicemail"></i>
+          <span class="text-disap"> Réponses </span>  
+          </a>
+        </li>
+      </ul>
+      <hr />
 
-    <hr>
-
-
-    <button @click="logout()" class="btn text-white">Se deconnecter</button>
-
-    
-
-  </div>
+      <button @click="logout()" class="btn text-white"><i class="fa-solid fa-right-from-bracket"></i> <span class="text-disap"> Se déconnecter</span> </button>
+    </div>
 
 
   <div class="content p-3" style="margin-left: 280px;"> 
@@ -141,5 +147,33 @@ background-image: url(img/display-top.webp);
 }
 
 
+
+
+/* Affichage pour écrans de taille moyenne */
+@media screen and (max-width: 600px) {
+
+body {
+   font-size: 12px !important;
+   
+}
+.content {
+  margin: 0px !important;
+  padding: 5px !important;
+  margin: 5px !important;
+ 
+}
+
+.text-disap {
+  display: none;
+}
+
+  .mysidebar {
+    width: 70% !important;
+    height:auto  !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+}
 
 </style>

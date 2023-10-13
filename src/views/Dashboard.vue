@@ -6,7 +6,6 @@ export default {
       quest7: [],
       quest10: [],
       average: [],
-      isSidebarVisible: true, // Ajoutez cette propriété
 
     };
   },
@@ -36,18 +35,7 @@ export default {
         });
     },
 
-     // Nouvelle méthode pour basculer la visibilité de la barre latérale
-  toggleSidebar() {
-  this.isSidebarVisible = !this.isSidebarVisible;
-
-  // Ajoute ou supprime la classe .d-none en fonction de isSidebarVisible
-  const sidebar = document.querySelector('.mysidebar');
-  if (this.isSidebarVisible) {
-    sidebar.classList.remove('d-none');
-  } else {
-    sidebar.classList.add('d-none');
-  }
-},
+    
 
     // Fonction pour récupérer le nombre de réponses de la question 6
     async getPieCharts() {
@@ -363,9 +351,7 @@ export default {
 <template>
   <main class="d-flex">
 
-     <button @click="toggleSidebar" class="btn btn-primary toggle-button">
-     <i class="fa-solid fa-sliders"></i>
-    </button>
+   
 
     <div
     
@@ -383,7 +369,7 @@ export default {
           alt="logo"
           style="height: 20px; width: 50px"
         />
-        <span class="fs-4"> &nbsp; Bigscreen</span>
+        <span class="fs-4 text-disap"> &nbsp; Bigscreen</span>
       </a>
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
@@ -393,30 +379,30 @@ export default {
             class="nav-link text-white active"
             aria-current="page"
           >
-            <i class="fa-solid fa-house"><use xlink:href="#home" /></i>
-            Accueil
+            <i class="fa-solid fa-house"></i>
+          <span class="text-disap"> Accueil</span>  
           </a>
         </li>
         <li>
           <a href="/DashboardQuestion" class="nav-link text-white">
-            <i class="fa-solid fa-square-poll-horizontal"></i
-            ><use xlink:href="#speedometer2" />
-            Questionnaire
+            <i class="fa-solid fa-square-poll-horizontal "></i
+            >
+           <span class="text-disap"> Questionnaire</span> 
           </a>
         </li>
         <li>
           <a href="/DashboardResponse" class="nav-link text-white">
-            <i class="fa-solid fa-voicemail"></i><use xlink:href="#table" />
-            Réponses
+            <i class="fa-solid fa-voicemail"></i>
+          <span class="text-disap"> Réponses </span>  
           </a>
         </li>
       </ul>
       <hr />
 
-      <button @click="logout()" class="btn text-white">Se déconnecter</button>
+      <button @click="logout()" class="btn text-white"><i class="fa-solid fa-right-from-bracket"></i> <span class="text-disap"> Se déconnecter</span> </button>
     </div>
 
-    <div class="d-flex flex-wrap wrapper_chart">
+    <div class="d-flex flex-wrap wrapper_chart p-4">
       <div style="background-color: white">
         <canvas id="myPieChart6" class="chart m-4 p-4"> </canvas>
       </div>
@@ -448,7 +434,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-margin-left: 180px;
+  margin-left: 190px;
     padding: 21px;
 }
 
@@ -459,42 +445,26 @@ margin-left: 180px;
 
 
 
-/* ... Vos autres styles ici ... */
 
-.mysidebar {
-  width: 280px;
-  /* Autres styles de la barre latérale */
-}
 
-/* Styles pour masquer la barre latérale lorsque isSidebarVisible est faux */
-.mysidebar.d-none {
-  display: none !important;
-  width: 0px !important;
-  height: 5px !important;
-}
-
-/* Styles pour ajuster la largeur du contenu principal */
+/* Affichage pour écrans de taille moyenne */
 @media screen and (max-width: 600px) {
   .wrapper_chart {
 margin-left: 0;
 justify-content: center;
   }
 
-.toggle-button {
-  height: 55px !important;
+.text-disap {
+  display: none;
 }
 
   .mysidebar {
-    width: 100% !important;
-    position: static !important;
-    display: none !important;
+    width: 70% !important;
+    height:auto  !important;
+    position: relative !important;
+    display: block !important;
   }
 
-  /* Styles pour masquer la barre latérale lorsque isSidebarVisible est faux en mode mobile */
-  .mysidebar.d-none-mobile {
-    display: none !important;
-    width: 0px;
-  }
 }
 
 </style>
