@@ -159,7 +159,7 @@ export default {
 <template>
   <header>
     <a href="question" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <img src="img/capsule_616x353.jpg" alt="logo" style="height: 50px; width: 100px;">
+      <img src="img/bigscreen_logowith.png" alt="logo" style="height: 40px;">
     </a>
   </header>
 

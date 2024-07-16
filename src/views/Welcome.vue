@@ -16,7 +16,7 @@ export default {
 
 <template>
   <div>
-    <!-- J'affiche le loader si loading est true -->
+
     <div v-if="loading" class="loading-overlay">
       <!-- Vous pouvez personnaliser le contenu de votre loader ici -->
       <div class="loading-wave">
@@ -27,22 +27,19 @@ export default {
       </div>
     </div>
 
+
     <!-- J'affiche le contenu de la page lorsque loading est false -->
     <div v-else>
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <img src="img/bigscreen_logo_black.png" alt="logo" style="height: 40px;">
       </a>
       <header id="showCase">
-        <h1>Bienvenue sur BigScreen</h1>
-        <p>Bigscreen est une entreprise qui développe une application VR permettant aux utilisateurs de regarder <mark>des films, émissions TV et jeux vidéos, en réalité virtuelle </mark> (VR) sur un écran géant virtuel, seul ou à plusieurs</p>
+        <h1 class="welcome-ttl my-3 animate__animated animate__fadeInUp ">Bienvenue sur notre sondage !</h1>
+        <p class="welcome-txt animate__animated animate__fadeInLeft ">Votre avis compte ! Participez à notre sondage et contribuez à l'amélioration de nos produits.</p>
         <router-link to="/question"> 
-          <button class="learn-more">
-            <span class="circle" aria-hidden="true">
-              <span class="icon arrow"></span>
-            </span>
-            <span class="button-text">Voir sondage</span>
-          </button>
+           <button class="btn-welc my-3 animate__animated animate__fadeInDown">Participer au sondage <i class="fa-solid fa-arrow-right"></i> </button>
         </router-link>
+        
       </header>
     </div>
   </div>
@@ -52,17 +49,78 @@ export default {
 
 <style>
 
+@font-face {
+    font-family: 'n-regular';
+    src: url("public/fonts/Nunito-Regular.ttf");
+}
+@font-face {
+    font-family: 'n-semi';
+    src:  url("public/fonts/Nunito-SemiBold.ttf") format('truetype');
+}
+@font-face {
+    font-family: 'n-bold';
+    src: url("public/fonts/Nunito-Bold.ttf") format('truetype');
+}
+
 * {
     margin:0;
     padding: 0;
 }
 
-body {
-    font-family: arial sans-serif;
-    font-size: 17px;
+
+/*Textes de l'accueil*/
+
+.welcome-ttl{
+    font-family: "n-bold";
+    font-size: 50px;
     color: white;
-    line-height: 1.6;
+    letter-spacing: 1.5px;
 }
+.welcome-txt{
+    font-family: "n-semi";
+    font-size: 35px;
+    color: #757B7D;
+    text-align: center;
+}
+
+/*Bouton de l'accueil*/
+
+.btn-welc{
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-family: "n-semi";
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  background-color: #4d1ef7;
+  box-shadow: 0px 15px 20px rgba(77, 30, 247,0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+button:active {
+  transform: translateY(-1px);
+}
+
+/*animations titres pour l'accueil*/
+
+.animate__animated.animate__fadeInLeft {
+  --animate-duration: 3s;
+}
+.animate__animated.animate__fadeInDown{
+  --animate-duration: 4s;
+}
+
 
 /* Style pour le loader */
 .loading-overlay {
@@ -128,7 +186,7 @@ body {
 
 /*style pour l'image de fond */
 #showCase {
-    background-image: url(https://i.ytimg.com/vi/tH3ZVoj8cDg/maxresdefault.jpg);
+    background-color: #151515;
     height: 100vh;
     background-position: center;
     background-size: cover;
