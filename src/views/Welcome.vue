@@ -7,11 +7,14 @@ export default {
   },
   mounted() {
     // J'utilise setTimeout pour simuler un chargement de 2 secondes.
-    setTimeout(() => {
-      this.loading = false; // Lorsque le chargement est terminé, je définis loading sur false.
-    }, 3000); 
-  },
+   setTimeout(() => {
+      setTimeout(() => {
+        this.loading = false; // Lorsque le chargement est terminé, je définis loading sur false.
+      }, 3000); // Durée de l'animation fade-out (ajustez si nécessaire)
+   })
+   },
 };
+
 </script>
 
 <template>
@@ -19,12 +22,7 @@ export default {
 
     <div v-if="loading" class="loading-overlay">
       <!-- Vous pouvez personnaliser le contenu de votre loader ici -->
-      <div class="loading-wave">
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-      </div>
+      <div class="traffic-loader"></div>
     </div>
 
 
@@ -123,8 +121,8 @@ button:active {
 
 
 /* Style pour le loader */
-.loading-overlay {
-  position: fixed;
+.loading-overlay{
+  position: fixed; /* Assure que l'overlay couvre toute la page */
   top: 0;
   left: 0;
   width: 100%;
@@ -132,57 +130,40 @@ button:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(img/display-oled.webp);
-  z-index: 999; /* Pour être au-dessus du contenu */
-  height: 100vh;
-    background-position: center;
-    background-size: cover;
-    display: flex;
+  background-color: #151515; /* Optionnel : ajoute un fond semi-transparent */
+  z-index: 1000; /* Assure que l'overlay est au-dessus de tout autre contenu */
 }
 
-.loading-wave {
-  width: 300px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
+.traffic-loader {
+  width: 50px;
+  height: 50px;
+  --c: radial-gradient(farthest-side, #fff 92%, #0000);
+  background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%,
+    var(--c) 0 50%;
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  animation: s8 1s infinite;
+  position: relative;
 }
 
-.loading-bar {
-  width: 20px;
-  height: 10px;
-  margin: 0 5px;
-  background-color: whitesmoke;
-  border-radius: 5px;
-  animation: loading-wave-animation 1s ease-in-out infinite;
+.traffic-loader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: 3px;
+  background: repeating-conic-gradient(#0000 0 35deg, #fff 0 90deg);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 0);
+  border-radius: 50%;
 }
 
-.loading-bar:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.loading-bar:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-.loading-bar:nth-child(4) {
-  animation-delay: 0.3s;
-}
-
-@keyframes loading-wave-animation {
-  0% {
-    height: 10px;
-  }
-
-  50% {
-    height: 50px;
-  }
-
+@keyframes s8 {
   100% {
-    height: 10px;
+    transform: rotate(0.5turn);
   }
 }
+
 /**fin style loader */
+
 
 /*style pour l'image de fond */
 #showCase {
