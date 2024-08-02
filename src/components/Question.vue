@@ -98,6 +98,10 @@ export default {
     // J'utilise cette fonction pour revenir à la question précédente.
     previousQuestion() {
       if (this.index > 0) {
+        console.log(this.answers[this.currentQuestion.id-2]);
+        this.A=this.answers[this.currentQuestion.id-2].userResponse;
+         this.B=this.answers[this.currentQuestion.id-2].userResponse;
+          this.C=this.answers[this.currentQuestion.id-2].userResponse;
         this.index--; // Je décrémente l'index pour revenir à la question précédente
         this.displayCurrentQuestion();
         this.showNextButton = true; // Je réaffiche le bouton "Next Question"
@@ -124,6 +128,23 @@ export default {
       } else if (this.currentQuestion.question_type === "C") {
         response.userResponse = this.C;
       }
+
+
+    function isNumber(str) {
+    return !isNaN(str) && str.trim() !== '';
+}
+      // Cette condition permet de remplir obligatoirement la champ vide avant de continuer 
+      if (response.userResponse=='') {
+         alert('Remplissez la case vide pour continuer pour continuez');
+        return
+      }
+
+    if(this.currentQuestion.id==2){
+        if (!isNumber(response.userResponse)) {
+          alert('Entrez votre age en chiffre');
+          return
+        }
+    }
 
       // Maintenant, je peux sauvegarder cet objet de réponse où je le souhaite, par exemple en le stockant dans un tableau
       this.answers.push(response);
@@ -183,7 +204,13 @@ export default {
       <!-- Question de type B -->
       <center>
         <div class="containerTypeB p-3" v-if="currentQuestion.question_type == 'B'">
-          <input type="text" v-model="B">
+          
+          <div class="input-container">
+  <input type="text" id="input" v-model="B">
+  <label for="input" class="label">Entrez votre réponse</label>
+  <div class="underline"></div>
+</div>
+
         </div>
       </center>
 
@@ -221,7 +248,7 @@ export default {
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Merci d'avoir participé à ce sondage</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-welc" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>Toute l'équipe de Bigscreen vous remercie pour votre engagement. Grâce à votre investissement, nous préparons une application toujours plus facile à utiliser, que ce soit en solo ou en famille. Si vous désirez consulter vos réponses ultérieurement, vous pouvez le faire à cette adresse : <router-link :to="`/checkoutresponse/${link_url}`">https://www.Bigscreen.com/{{link_url}}</router-link> </p>
@@ -246,6 +273,59 @@ body {
   background-position: center;
   background-size: cover;
 }
+
+/* Début Style pour le input */
+
+.input-container {
+  position: relative;
+  margin: 50px auto;
+  width: 200px;
+}
+
+.input-container input[type="text"] {
+  font-size: 20px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.input-container .label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #ccc;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-container input[type="text"]:focus ~ .label,
+.input-container input[type="text"]:valid ~ .label {
+  top: -20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.input-container .underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #333;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.input-container input[type="text"]:focus ~ .underline,
+.input-container input[type="text"]:valid ~ .underline {
+  transform: scaleX(1);
+}
+
+
+/* Fin Style pour le input */
 
 .container-question {
   position: relative;
@@ -283,6 +363,35 @@ body {
   border-radius: 100%;
   top: 400px;
   right: 90%;
+}
+
+/*Bouton de l'accueil*/
+
+.btn-welc{
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-family: "n-semi";
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  background-color: #4d1ef7;
+  box-shadow: 0px 15px 20px rgba(77, 30, 247,0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+button:active {
+  transform: translateY(-1px);
 }
 
 /** Affichage pour les écrans de taille moyenne (mobile) */

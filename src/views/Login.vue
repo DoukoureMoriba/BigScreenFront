@@ -79,13 +79,34 @@ export default {
 </template>
 
 <style>
+
+
+    @font-face {
+    font-family: 'n-regular';
+    src: url("public/fonts/Nunito-Regular.ttf");
+}
+@font-face {
+    font-family: 'n-semi';
+    src:  url("public/fonts/Nunito-SemiBold.ttf") format('truetype');
+}
+@font-face {
+    font-family: 'n-bold';
+    src: url("public/fonts/Nunito-Bold.ttf") format('truetype');
+}
+
+* {
+    margin:0;
+    padding: 0;
+}
+
+
 html {
   height: 100%;
 }
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  
   background-image: url(img/bigscreen_vr_light_headset.png);
    height: 100vh;
     background-position: center;
@@ -106,6 +127,8 @@ body {
 }
 
 .login-box h2 {
+  font-family: "n-bold";
+  font-size: 3rem;
   margin: 0 0 30px;
   padding: 0;
   color: #fff;
@@ -142,7 +165,7 @@ body {
 .login-box .user-box input:valid ~ label {
   top: -20px;
   left: 0;
-  color: #03e9f4;
+  color: #4d1ef7;
   font-size: 12px;
 }
 
@@ -151,7 +174,7 @@ body {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
-  color: #03e9f4;
+  color: #4d1ef7;
   font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;
@@ -162,11 +185,11 @@ body {
 }
 
 .login-box button:hover {
-  background: #03e9f4;
+  background: #4d1ef7;
   color: #fff;
   border-radius: 5px;
-  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
-    0 0 100px #03e9f4;
+  box-shadow: 0 0 5px #4d1ef7, 0 0 25px #4d1ef7, 0 0 50px #4d1ef7,
+    0 0 100px #4d1ef7;
 }
 
 .login-box button span {
@@ -179,7 +202,7 @@ body {
   left: -100%;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #03e9f4);
+  background: linear-gradient(90deg, transparent, #4d1ef7);
   animation: btn-anim1 1s linear infinite;
 }
 
@@ -198,7 +221,7 @@ body {
   right: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(180deg, transparent, #03e9f4);
+  background: linear-gradient(180deg, transparent, #4d1ef7);
   animation: btn-anim2 1s linear infinite;
   animation-delay: 0.25s;
 }
@@ -218,7 +241,7 @@ body {
   right: -100%;
   width: 100%;
   height: 2px;
-  background: linear-gradient(270deg, transparent, #03e9f4);
+  background: linear-gradient(270deg, transparent, #4d1ef7);
   animation: btn-anim3 1s linear infinite;
   animation-delay: 0.5s;
 }
@@ -238,7 +261,7 @@ body {
   left: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(360deg, transparent, #03e9f4);
+  background: linear-gradient(360deg, transparent, #4d1ef7);
   animation: btn-anim4 1s linear infinite;
   animation-delay: 0.75s;
 }

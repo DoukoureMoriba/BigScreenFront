@@ -26,6 +26,13 @@ export default {
 </script>
 
 <template>
+
+
+  
+
+
+ <center> <h1>Vérifiez vos réponses sur cette page.</h1>
+ <br>
   <div v-for="a in answer" :key="a.id">
     <h3>Question {{ a.response_id + 0 }}/20</h3>
     <h4>{{ a.question_body }}</h4>
@@ -33,9 +40,40 @@ export default {
   </div>
 
   <div>
-    <h1>Merci d'avoir participé à ce sondage</h1>
+    <h2>Merci d'avoir participé à ce sondage</h2>
   </div>
+  <br>
+  </center>
 </template>
 
 <style>
+
+
+@font-face {
+    font-family: 'n-regular';
+    src: url("public/fonts/Nunito-Regular.ttf");
+}
+@font-face {
+    font-family: 'n-semi';
+    src:  url("public/fonts/Nunito-SemiBold.ttf") format('truetype');
+}
+@font-face {
+    font-family: 'n-bold';
+    src: url("public/fonts/Nunito-Bold.ttf") format('truetype');
+}
+
+* {
+    margin:0;
+    padding: 0;
+}
+
+
+  body {
+  font-family: "n-regular";
+  font-size: 1rem;
+  margin: 0 0 30px;
+  padding: 0;
+  text-align: center;
+  }
+
 </style>
