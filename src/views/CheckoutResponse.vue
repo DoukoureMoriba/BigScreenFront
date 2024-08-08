@@ -31,18 +31,17 @@ export default {
   
 
 
- <center> <h1>Vérifiez vos réponses sur cette page.</h1>
+ <center> 
+  <h2 class="big_title text-white" >Vérifiez vos réponses sur cette page.</h2>
  <br>
-  <div v-for="a in answer" :key="a.id">
-    <h3>Question {{ a.response_id + 0 }}/20</h3>
-    <h4>{{ a.question_body }}</h4>
-    <p>Réponse donnée : {{ a.user_response }}</p>
-  </div>
+  <div class="card" v-for="a in answer" :key="a.id">
+ 
+  <p class="title_card">Question {{ a.response_id + 0 }}/20</p>
+  <p class="description_card">{{ a.question_body }}  </p>
+  <p class="response_card"><br> Réponse donnée : <span style="color:rgba(77, 30, 247,1);;"> {{ a.user_response }}</span> </p>
+</div>
 
-  <div>
-    <h2>Merci d'avoir participé à ce sondage</h2>
-  </div>
-  <br>
+
   </center>
 </template>
 
@@ -51,15 +50,15 @@ export default {
 
 @font-face {
     font-family: 'n-regular';
-    src: url("public/fonts/Nunito-Regular.ttf");
+    src: url("/fonts/Nunito-Regular.ttf");
 }
 @font-face {
     font-family: 'n-semi';
-    src:  url("public/fonts/Nunito-SemiBold.ttf") format('truetype');
+    src:  url("/fonts/Nunito-SemiBold.ttf") format('truetype');
 }
 @font-face {
     font-family: 'n-bold';
-    src: url("public/fonts/Nunito-Bold.ttf") format('truetype');
+    src: url("/fonts/Nunito-Bold.ttf") format('truetype');
 }
 
 * {
@@ -68,12 +67,56 @@ export default {
 }
 
 
-  body {
-  font-family: "n-regular";
-  font-size: 1rem;
-  margin: 0 0 30px;
-  padding: 0;
+body {
+   background-color: #151515;
+   }
+
+/** début modification de la card */
+
+.card {
+  width: 300px;
+  height: 300px;
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  gap: 13px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 20px rgba(77, 30, 247,0.6);
+}
+
+
+
+.title_card {
+  font-family: 'n-bold';
+  font-size: 1.5em;
+  font-weight: 800;
+  color: rgb(26, 26, 26);
+}
+
+.description_card {
+  font-family: 'n-semi';
   text-align: center;
-  }
+  font-size: 1em;
+  font-weight: 600;
+  color: rgb(99, 99, 99);
+}
+
+.response_card {
+  font-family: 'n-regular';
+   text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(99, 99, 99);
+}
+/*fin modification card*/
+
+
 
 </style>

@@ -186,29 +186,29 @@ export default {
 
   <!-- Début du sondage! -->
   <div class="container-question">
-    <div class="question_header text-black">
+    <div class="question_header text-white">
       <h2 class="text-center title_question"> {{ currentQuestion.title }} </h2>
       <h4 class="text-center mt-3 body_question">{{ currentQuestion.question_body }}</h4>
     </div>
 
-    <div class="question_main">
-      <center>
+    <div class="question_main text-white ">
+      
+    <center>
         <!-- Question de type A -->
-        <div style="list-style: none" class="containerTypeA" v-if="currentQuestion.question_type == 'A'">
-          <li v-for="index in currentQuestion.propositions" :key="index">
-            <input type="radio" v-model="A" :value="index">{{ index }}
+        <div style="list-style: none; display:flex; justify-content:center; flex-direction:column;  " class="containerTypeA" v-if="currentQuestion.question_type == 'A'">
+          <li style="list-style: none; margin:10px;  " v-for="index in currentQuestion.propositions" :key="index">
+            <input type="radio" v-model="A" :value="index"> <span>{{ index }}</span>
           </li>
         </div>
       </center>
 
+
+
       <!-- Question de type B -->
       <center>
         <div class="containerTypeB p-3" v-if="currentQuestion.question_type == 'B'">
-          
           <div class="input-container">
-  <input type="text" id="input" v-model="B">
-  <label for="input" class="label">Entrez votre réponse</label>
-  <div class="underline"></div>
+  <input type="text" id="input" v-model="B" placeholder="Entrez votre réponse" class="input">
 </div>
 
         </div>
@@ -217,8 +217,9 @@ export default {
       <!-- Question de type C -->
       <center>
         <div class="containerTypeC p-3" v-if="currentQuestion.question_type == 'C'">
-          <li style="list-style: none" v-for="index in [1,2,3,4,5]" :key="index">
-            <input type="radio" v-model="C" :value="index">{{ index }}
+          <li style="list-style: none; margin:10px;"   v-for="index in [1,2,3,4,5]" :key="index">
+            
+            <input type="radio" v-model="C" :value="index"> <span>{{ index }} </span>
           </li>
         </div>
       </center>
@@ -260,77 +261,105 @@ export default {
 </template>
 
 <style>
+
+  @font-face {
+    font-family: 'n-regular';
+    src: url("public/fonts/Nunito-Regular.ttf");
+}
+@font-face {
+    font-family: 'n-semi';
+    src:  url("public/fonts/Nunito-SemiBold.ttf") format('truetype');
+}
+@font-face {
+    font-family: 'n-bold';
+    src: url("public/fonts/Nunito-Bold.ttf") format('truetype');
+}
+
+* {
+    margin:0;
+    padding: 0;
+}
+
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: black;
+ 
 }
 
 body {
-  background-image: url(img/display-oled.webp);
+ 
   height: 100vh;
   background-position: center;
   background-size: cover;
+  background-color: #151515;
 }
+
+
+/* Police pour les titres de question */
+.title_question {
+  font-family:'n-bold';
+
+}
+
+.body_question {
+  font-family: 'n-semi';
+}
+.label {
+  font-family: 'n-regular';
+}
+/* Fin pour les titres de question */
+
+
+/* input modification */
+.input-container {
+ display: flex;
+ line-height: 28px;
+ align-items: center;
+ position: relative;
+ max-width: 250px;
+}
+
+.input {
+ width: 100%;
+ height: 40px;
+ line-height: 28px;
+ padding: 0 1rem;
+ border: 2px solid transparent;
+ border-radius: 8px;
+ outline: none;
+ background-color: #f3f3f4;
+ color: #0d0c22;
+ transition: .3s ease;
+}
+
+.input::placeholder {
+ color: #9e9ea7;
+}
+
+.input:focus, input:hover {
+ outline: none;
+ border-color: rgba(77, 30, 247,0.4);
+ background-color: #fff;
+ box-shadow: 0 0 0 4px rgba(77, 30, 247,0.4);
+}
+
+/* fin input modification*/
+
+
 
 /* Début Style pour le input */
 
-.input-container {
-  position: relative;
-  margin: 50px auto;
-  width: 200px;
-}
-
-.input-container input[type="text"] {
-  font-size: 20px;
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid #ccc;
-  padding: 5px 0;
-  background-color: transparent;
-  outline: none;
-}
-
-.input-container .label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #ccc;
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
-
-.input-container input[type="text"]:focus ~ .label,
-.input-container input[type="text"]:valid ~ .label {
-  top: -20px;
-  font-size: 16px;
-  color: #333;
-}
-
-.input-container .underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background-color: #333;
-  transform: scaleX(0);
-  transition: all 0.3s ease;
-}
-
-.input-container input[type="text"]:focus ~ .underline,
-.input-container input[type="text"]:valid ~ .underline {
-  transform: scaleX(1);
-}
 
 
 /* Fin Style pour le input */
 
+
+
 .container-question {
   position: relative;
   padding: 15px;
-  background-color: white;
+  
   height: 453px;
   width: 650px;
   border-radius: 10px;
@@ -347,7 +376,7 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 100%;
-  top: 400px;
+  top: 250px;
   left: 90%;
 }
 
@@ -361,7 +390,7 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 100%;
-  top: 400px;
+  top: 250px;
   right: 90%;
 }
 
