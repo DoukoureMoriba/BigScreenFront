@@ -180,6 +180,10 @@ h3 {
   background-color:#4d1ef7 ;
 }
 
+.mysidebar {
+  width: 220px !important;
+}
+
 /* Affichage pour écrans de taille moyenne */
 @media screen and (max-width: 600px) {
 
