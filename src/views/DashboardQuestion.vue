@@ -176,6 +176,9 @@ h3 {
   font-family: "n-bold";
 }
 
+.nav-pills .nav-link.active {
+  background-color:#4d1ef7 ;
+}
 
 /* Affichage pour écrans de taille moyenne */
 @media screen and (max-width: 600px) {

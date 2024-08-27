@@ -249,6 +249,10 @@ h3 {
   border-color: #4d1ef7; /* Couleur de bordure pour la page active */
 }
 
+.nav-pills .nav-link.active {
+  background-color:#4d1ef7 ;
+}
+
 /* Affichage pour écrans de taille moyenne */
 @media screen and (max-width: 600px) {
 

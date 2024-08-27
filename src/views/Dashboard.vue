@@ -394,18 +394,18 @@ export default {
 
 
   <h1 class="text-black text-end  mx-5" style="font-family:n-bold;"> Bienvenue sur la page des statistiques</h1>
-    <div class="d-flex flex-wrap wrapper_chart " >
-      <div style="background-color: white" class="ms-3" >
+    <div class="d-flex flex-wrap wrapper_chart">
+      <div style="background-color: white" >
         <canvas id="myPieChart6" class="chart m-4 "> </canvas>
       </div>
       <div style="background-color: white ">
-        <canvas id="myPieChart7" class="chart m-4 p-4"></canvas>
-      </div>
-      <div style="background-color: white" class="ms-3">
-        <canvas id="myPieChart10" class="chart m-4 p-3"></canvas>
+        <canvas id="myPieChart7" class="chart m-4 "></canvas>
+      </div> 
+      <div style="background-color: white" >
+        <canvas id="myPieChart10" class="chart m-4 p-2"></canvas>
       </div>
       <div style="background-color: white">
-        <canvas id="myRadarChart11_15" class="chart m-4 p-4"></canvas>
+        <canvas id="myRadarChart11_15" class="chart m-4 p-2"></canvas>
       </div>
     </div>
   </main>
@@ -430,20 +430,18 @@ export default {
 
 body {
   background-color: #fff;
-  
   height: 100vh;
   background-position: center;
   background-size: cover;
   margin: 0;
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 .wrapper_chart {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin-left: 190px;
-  padding: 21px;
+  justify-content: space-around;
+  margin-left: 150px;
 }
 
 .chart {
@@ -456,6 +454,14 @@ body {
   font-family: "n-bold";
 }
 
+
+.nav-pills .nav-link.active {
+  background-color:#4d1ef7 ;
+}
+
+.mysidebar {
+  width: 220px !important;
+}
 
 /* Affichage pour écrans de taille moyenne */
 @media screen and (max-width: 600px) {
