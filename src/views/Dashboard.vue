@@ -1,5 +1,6 @@
 <script>
 export default {
+  inject: ['toaster'],
   data() {
     return {
       quest6: [],
@@ -26,7 +27,8 @@ export default {
         .then((res) => {
           console.log(res);
           if (res.status == "Done") {
-            alert("Vous avez été déconnecté en tant qu'administrateur.");
+            this.toaster.showSuccess(res.message);
+            sessionStorage.clear();
             this.$router.push("/"); // Redirection vers la route "welcome.vue"
           }
         })
@@ -93,7 +95,7 @@ export default {
     createPieChart7() {
       // Données pour le diagramme en secteurs
       const data = {
-        labels: ["Occulus store", "Windows store", "Viveport", "SteamVR"], // Utilisation des libellés que j'ai spécifiés
+        labels: Object.keys(this.quest7), // Utilisation des libellés que j'ai spécifiés
         datasets: [
           {
             data: Object.values(this.quest7), // Utilisation des valeurs de la question 7
@@ -109,7 +111,7 @@ export default {
           legend: {
             labels: {
               font: {
-                size: 12, // Taille de ma police des libellés
+                size: 16, // Taille de ma police des libellés
               },
             },
           },
@@ -122,6 +124,11 @@ export default {
       };
 
       // Créer le diagramme en secteurs pour myPieChart7
+      // Chart.defaults.font.family = "n-bold";
+      Chart.defaults.font = {
+        size: 18,
+        family: "n-bold",
+      };
       const ctx = document.getElementById("myPieChart7");
       new Chart(ctx, {
         type: "pie",
@@ -144,13 +151,7 @@ export default {
           const quest10 = res.question10;
           // Données pour le diagramme en secteurs de la question 10
           const data = {
-            labels: [
-              "Regarder des films",
-              "Travailler",
-              "jouer en solo",
-              "Regarder la TV en direct",
-              "Jouer en équipe",
-            ],
+            labels: Object.keys(quest10),
             datasets: [
               {
                 data: Object.values(quest10),
@@ -214,15 +215,10 @@ export default {
           const average = res.average;
           // Données pour le diagramme radar
           const data = {
-            labels: [
-              "qualité de l'image",
-              "confort d'utilisation",
-              "connexion réseau",
-              "qualité des graphismes 3D",
-              "qualité audio",
-            ],
+            labels: Object.keys(average),
             datasets: [
               {
+                label: 'Radar Charts 11-15',
                 data: Object.values(average),
                 backgroundColor: "rgba(255, 87, 51, 0.2)",
                 borderColor: "#000",
@@ -236,11 +232,11 @@ export default {
             responsive: true,
             plugins: {
               legend: {
-                labels: {
-                  font: {
-                    size: 30, // J'augmente la taille de la police des labels ici
-                  },
-                },
+                // labels: {
+                //   font: {
+                //     size: 30, // J'augmente la taille de la police des labels ici
+                //   },
+                // },
               },
               title: {
                 display: true,
@@ -251,7 +247,7 @@ export default {
             scale: {
               pointLabels: {
                 font: {
-                  size: 20,
+                  size: 12,
                 },
               },
             },
@@ -281,16 +277,11 @@ export default {
   async mounted() {
     // Diagramme Pie Charts de la question 6
     await this.getPieCharts(); // J'appelle la fonction asynchrone pour récupérer le nombre de réponses de la question 6
+    console.log(this.quest6);
     console.log(Object.values(this.quest6));
     // Données pour le diagramme en secteurs
     const data = {
-      labels: [
-        "Oculus Rift/s",
-        "Windows Mixed Reality",
-        "Oculus Quest",
-        "Valve index",
-        "HTC Vive",
-      ], // Utilisation des clés comme labels
+      labels: Object.keys(this.quest6), // Utilisation des clés comme labels
       datasets: [
         {
           data: Object.values(this.quest6), // Utilisation des valeurs comme données
@@ -319,7 +310,8 @@ export default {
         title: {
           display: true,
           text: "Diagramme Pie Chart 6", // Mon titre du diagramme
-          fontSize: 16, // Taille de la police du titre
+          fontSize: 10, // Taille de la police du titre
+          
         },
       },
     };
@@ -348,8 +340,10 @@ export default {
 };
 </script>
 
+
+
 <template>
-  <main class="d-flex">
+  <main class="d-flex flex-column">
 
    
 
@@ -361,15 +355,11 @@ export default {
     >
       <a
         href="dashboard"
-        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none monlogo"
         style="x"
       >
-        <img
-          src="img/capsule_616x353.jpg"
-          alt="logo"
-          style="height: 20px; width: 50px"
-        />
-        <span class="fs-4 text-disap"> &nbsp; Bigscreen</span>
+               <img src="img/bigscreen_logowith.png" alt="logo" style="height:30px;width:100%;">
+
       </a>
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
@@ -380,37 +370,39 @@ export default {
             aria-current="page"
           >
             <i class="fa-solid fa-house"></i>
-          <span class="text-disap"> Accueil</span>  
+          <span class="text-disap font_nav_bar"> Accueil</span>  
           </a>
         </li>
         <li>
           <a href="/DashboardQuestion" class="nav-link text-white">
             <i class="fa-solid fa-square-poll-horizontal "></i
             >
-           <span class="text-disap"> Questionnaire</span> 
+           <span class="text-disap font_nav_bar"> Questionnaire</span> 
           </a>
         </li>
         <li>
           <a href="/DashboardResponse" class="nav-link text-white">
             <i class="fa-solid fa-voicemail"></i>
-          <span class="text-disap"> Réponses </span>  
+          <span class="text-disap font_nav_bar"> Réponses </span>  
           </a>
         </li>
       </ul>
       <hr />
 
-      <button @click="logout()" class="btn text-white"><i class="fa-solid fa-right-from-bracket"></i> <span class="text-disap"> Se déconnecter</span> </button>
+      <button @click="logout()" class="btn text-white"><i class="fa-solid fa-right-from-bracket"></i> <span class="text-disap font_nav_bar"> Se déconnecter</span> </button>
     </div>
 
-    <div class="d-flex flex-wrap wrapper_chart p-4">
-      <div style="background-color: white">
-        <canvas id="myPieChart6" class="chart m-4 p-4"> </canvas>
+
+  <h1 class="text-black text-end  mx-5" style="font-family:n-bold;"> Bienvenue sur la page des statistiques</h1>
+    <div class="d-flex flex-wrap wrapper_chart " >
+      <div style="background-color: white" class="ms-3" >
+        <canvas id="myPieChart6" class="chart m-4 "> </canvas>
       </div>
-      <div style="background-color: white">
+      <div style="background-color: white ">
         <canvas id="myPieChart7" class="chart m-4 p-4"></canvas>
       </div>
-      <div style="background-color: white">
-        <canvas id="myPieChart10" class="chart m-4 p-4"></canvas>
+      <div style="background-color: white" class="ms-3">
+        <canvas id="myPieChart10" class="chart m-4 p-3"></canvas>
       </div>
       <div style="background-color: white">
         <canvas id="myRadarChart11_15" class="chart m-4 p-4"></canvas>
@@ -420,9 +412,25 @@ export default {
 </template>
 
 <style>
+
+
+@font-face {
+  font-family: "n-regular";
+  src: url("/fonts/Nunito-Regular.ttf");
+}
+@font-face {
+  font-family: "n-semi";
+  src: url("/fonts/Nunito-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "n-bold";
+  src: url("/fonts/Nunito-Bold.ttf") format("truetype");
+}
+
+
 body {
   background-color: #fff;
-  font-family: Arial, sans-serif;
+  
   height: 100vh;
   background-position: center;
   background-size: cover;
@@ -435,7 +443,7 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   margin-left: 190px;
-    padding: 21px;
+  padding: 21px;
 }
 
 .chart {
@@ -444,7 +452,9 @@ body {
 }
 
 
-
+.font_nav_bar {
+  font-family: "n-bold";
+}
 
 
 /* Affichage pour écrans de taille moyenne */
@@ -459,7 +469,7 @@ justify-content: center;
 }
 
   .mysidebar {
-    width: 70% !important;
+    width: 100% !important;
     height:auto  !important;
     position: relative !important;
     display: block !important;

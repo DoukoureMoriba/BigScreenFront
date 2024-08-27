@@ -1,5 +1,6 @@
 <script>
 export default {
+  inject: ['toaster'],
   data() {
     return {
       email: "", // Je stocke l'adresse e-mail de l'utilisateur
@@ -27,11 +28,19 @@ export default {
           console.log(res);
           if (res.status == "Done") {
             sessionStorage.setItem('est-t-il-connecter',true);
-            alert(res.message); // J'affiche un message de succès
-            this.$router.push("/Dashboard"); // Je redirige vers la page du tableau de bord
+            this.toaster.showSuccess(res.message); // J'affiche un message de succès
+            // this.$router.push("/Dashboard"); // Je redirige vers la page du tableau de bord
+
+            setInterval( ()=>{window.location.href="/Dashboard"}
+               , 5000
+            )
+            
           } else {
-            alert("Impossible de vous connecter"); // J'affiche un message d'erreur en cas d'échec de la connexion
-            window.location.reload(); // Je recharge la page en cas d'échec de la connexion
+            this.toaster.showError("Impossible de vous connecter"); // J'affiche un message d'erreur en cas d'échec de la connexion
+            setInterval( ()=>{window.location.reload();}
+               , 3000
+            )
+             // Je recharge la page en cas d'échec de la connexion après 3000ms
           }
         })
         .catch((error) => {
@@ -44,7 +53,7 @@ export default {
 
 <template>
   <div class="login-box">
-    <h2>BigScreen</h2>
+     <center> <img src="img/bigscreen_logowith.png" alt="logo" style="height: 40px;margin:15px;"> </center>  
     <form @submit.prevent="login()">
       <!-- J'empêche l'action par défaut du formulaire de s'exécuter -->
       <div class="user-box">
