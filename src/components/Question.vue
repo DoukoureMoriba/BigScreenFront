@@ -15,6 +15,7 @@ export default {
       showNextButton: true, // Je contrôle l'affichage du bouton "Next Question".
       showFinalizeButton: false, // Je contrôle l'affichage du bouton "Finalisez".
       link_url: "", // Je stocke l'URL obtenue après soumission des réponses.
+      emailError: false, //Montre le message d'erreur au niveau de l'input email
     };
   },
 
@@ -32,6 +33,9 @@ export default {
         this.question = res.data; // Je récupère toutes les informations de la table Question depuis l'API.
       }
     },
+
+
+      
 
     
     // J'utilise cette fonction pour détecter l'appui sur la touche "Enter"
@@ -189,6 +193,19 @@ export default {
 
         //Infotmation importante : cette fonction assure que les réponses de l'utilisateur sont valides avant d'être sauvegardées, Car j'ai besoin de données réel et spécifique.
       }
+
+      
+
+
+  // Je vérifie également si l'ID de la question actuelle est 1 spécifiquement pour l'email.
+      if (this.currentQuestion.id == 1) {
+        if (!response.userResponse.trim() || !response.userResponse.includes("@")) {
+          this.toaster.showError("Entrez un email correcte");// Si ce n'est pas un email, j'affiche un message d'erreur avec le toaster
+          return;
+        }
+
+        }
+      
 
 
 
@@ -363,7 +380,6 @@ export default {
       <button
         type="submit"
         class="btn btn-primary m-2 "
-
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
         v-if="showFinalizeButton"

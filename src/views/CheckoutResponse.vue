@@ -96,10 +96,12 @@ export default {
  
   <p class="title_card">Question {{ a.response_id + 0 }}/20</p>
   <p class="description_card">{{ a.question_body }}  </p>
-<!-- Champs de texte éditable pour la réponse -->
+
+      <!-- Champs de texte  pour la réponse -->
+      <span>Cliquez pour modifier vos réponses</span>
       <textarea class="response_input" v-model="a.user_response"></textarea>
       
-      <!-- Bouton pour soumettre la mise à jour -->
+      <!-- Bouton pour modification -->
       <button class="btn btn-success mt-2" @click="updateResponse(a.id, a.user_response)">
         Enregistrer les modifications
       </button>
@@ -144,8 +146,8 @@ body {
 /** début modification de la card */
 
 .card {
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   background-color: #fff;
   border-radius: 8px;
   display: flex;
@@ -186,5 +188,14 @@ body {
   color: rgb(99, 99, 99);
 }
 /*fin modification card*/
+
+textarea {
+  color:#4d1ef7 ;
+  font-family: 'n-bold';
+}
+
+span {
+  font-family: 'n-semi';
+}
 
 </style>
