@@ -15,6 +15,7 @@ export default {
       showNextButton: true, // Je contrôle l'affichage du bouton "Next Question".
       showFinalizeButton: false, // Je contrôle l'affichage du bouton "Finalisez".
       link_url: "", // Je stocke l'URL obtenue après soumission des réponses.
+      emailError: false, //Montre le message d'erreur au niveau de l'input email
     };
   },
 
