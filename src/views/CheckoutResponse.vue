@@ -1,9 +1,5 @@
 <script>
 export default {
-
-
-  inject: ['toaster'],// J'injecte une dépendance "toaster" pour accéder aux méthodes du toaster, comme afficher des messages d'erreur ou de succes.
-
   data() {
     return {
       answer: [], // Je stocke les réponses récupérées de l'API
@@ -21,23 +17,6 @@ export default {
       if (res.status == "Done") {
         this.answer = res.data; // Récupération de toutes les informations dans la table Réponses depuis l'API
         console.log(this.answer);
-      }
-    },
-
-    // Cette fonction me permet de mettre à jour les réponses depuis l'API.
-    async updateResponse(responseId, updatedResponse) {
-      var url = "http://127.0.0.1:8000/api/updateResponse/" + responseId;
-      var res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_response: updatedResponse }),
-      });
-      if (res.ok) {
-        console.log("Mise à jour réussie !");
-       this.toaster.showSuccess(res.message); // J'affiche un message de succès
-      } else {
-        console.log("Erreur lors de la mise à jour.");
-            this.toaster.showError("Erreur lors de la mise à jour des réponses  ."); // J'affiche un message d'erreur en cas d'échec de la connexion
       }
     },
 
@@ -96,16 +75,8 @@ export default {
  
   <p class="title_card">Question {{ a.response_id + 0 }}/20</p>
   <p class="description_card">{{ a.question_body }}  </p>
-
-      <!-- Champs de texte  pour la réponse -->
-      <span>Cliquez pour modifier vos réponses</span>
-      <textarea class="response_input" v-model="a.user_response"></textarea>
-      
-      <!-- Bouton pour modification -->
-      <button class="btn btn-success mt-2" @click="updateResponse(a.id, a.user_response)">
-        Enregistrer les modifications
-      </button>
-      </div>
+  <p class="response_card"><br> Réponse donnée : <span style="color:rgba(77, 30, 247,1);"> {{ a.user_response }}</span> </p>
+</div>
 
 
 <!-- Bouton de retour en haut -->
@@ -146,8 +117,8 @@ body {
 /** début modification de la card */
 
 .card {
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
   background-color: #fff;
   border-radius: 8px;
   display: flex;
@@ -188,14 +159,5 @@ body {
   color: rgb(99, 99, 99);
 }
 /*fin modification card*/
-
-textarea {
-  color:#4d1ef7 ;
-  font-family: 'n-bold';
-}
-
-span {
-  font-family: 'n-semi';
-}
 
 </style>
