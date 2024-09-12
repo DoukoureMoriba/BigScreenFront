@@ -19,6 +19,7 @@ export default {
   },
 
   methods: {
+
     // J'utilise cette fonction pour récupérer la liste des questions dès que l'utilisateur charge la page depuis l'Api.
     async getQuestion() {
       var url = "http://127.0.0.1:8000/api/questionList";
@@ -31,7 +32,11 @@ export default {
       if (res.status == "Done") {
         this.question = res.data; // Je récupère toutes les informations de la table Question depuis l'API.
       }
+      console.log(this.question);
     },
+
+
+      
 
     
     // J'utilise cette fonction pour détecter l'appui sur la touche "Enter"
@@ -190,6 +195,19 @@ export default {
         //Infotmation importante : cette fonction assure que les réponses de l'utilisateur sont valides avant d'être sauvegardées, Car j'ai besoin de données réel et spécifique.
       }
 
+      
+
+
+  // Je vérifie également si l'ID de la question actuelle est 1 spécifiquement pour l'email.
+      if (this.currentQuestion.id == 1) {
+        if (!response.userResponse.trim() || !response.userResponse.includes("@")) {
+          this.toaster.showError("Entrez un email correcte");// Si ce n'est pas un email, j'affiche un message d'erreur avec le toaster
+          return;
+        }
+
+        }
+      
+
 
 
       // Maintenant, je peux sauvegarder cet objet de réponse où je le souhaite, par exemple en le stockant dans un tableau
@@ -336,20 +354,24 @@ export default {
 
       <!-- Question de type C -->
       <center>
-        <div
-          class="containerTypeC p-3"
-          v-if="currentQuestion.question_type == 'C'"
-        >
-          <li
-            style="list-style: none; margin: 10px ; "
-            v-for="index in [1, 2, 3, 4, 5]"
-            :key="index"
-          >
-            <input type="radio" v-model="C" :value="index"  />
-            <span class="mx-2">{{ index }} </span>
-          </li>
-        </div>
-      </center>
+  <div
+    class="containerTypeC p-3"
+    v-if="currentQuestion.question_type == 'C'"
+  >
+    <ul class="list-inline">
+      <li
+        class="list-inline-item"
+        v-for="index in [1, 2, 3, 4, 5]"
+        :key="index"
+        style="margin: 10px;"
+      >
+        <input type="radio" v-model="C" :value="index" />
+        <span class="mx-2">{{ index }}</span>
+      </li>
+    </ul>
+  </div>
+</center>
+
     </div>
 
     <div class="question_footer p-3" style="display : flex ; justify-content : end">
@@ -363,7 +385,6 @@ export default {
       <button
         type="submit"
         class="btn btn-primary m-2 "
-
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
         v-if="showFinalizeButton"
