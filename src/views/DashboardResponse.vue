@@ -114,7 +114,7 @@ export default {
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
         style="x"
       >
-        <img src="img/bigscreen_logowith.png" alt="logo" style="height:30px;width:100%;">
+        <img src="img/bigscreen_logowith.png" class="bigscreen-logo" alt="logo" style="height:30px;width:100%;">
       </a>
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
@@ -257,7 +257,7 @@ h3 {
   width: 220px !important;
 }
 /* Affichage pour écrans de taille moyenne */
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
 
 body {
    font-size: 12px !important;
@@ -280,6 +280,105 @@ body {
     position: relative !important;
     display: block !important;
   }
+
+} */
+
+@media screen and (max-width: 426px) {
+
+
+  .mysidebar {
+    width: 100% !important;
+    height:auto  !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+ main{
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh !important;
+ }
+
+ .content{
+  margin: 0px !important;
+  padding: 10px !important;
+  height: 100% !important ;
+ }
+
+ .content tbody thead{
+ font-size: 5px !important;
+ }
+
+.bigscreen-logo{
+  width: 120px !important;
+  height: auto !important;
+}
+
+}
+
+@media screen and (max-width: 376px) {
+
+
+  .mysidebar {
+    width: 100% !important;
+    height:auto  !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+ main{
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh !important;
+ }
+
+ .content{
+  margin: 0px !important;
+  padding: 10px !important;
+  height: 100% !important ;
+ }
+
+ .content tbody tr td{
+ font-size: 15px !important;
+ }
+
+.bigscreen-logo{
+  width: 120px !important;
+  height: auto !important;
+}
+
+}
+
+@media screen and (max-width: 321px) {
+
+
+  .mysidebar {
+    width: 100% !important;
+    height:auto  !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+ main{
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh !important;
+ }
+
+ .content{
+  margin: 0px !important;
+  padding: 10px !important;
+  height: 100% !important ;
+ }
+
+ .content tbody tr td{
+ font-size: 11px !important;
+ }
+
+.bigscreen-logo{
+  width: 120px !important;
+  height: auto !important;
+}
 
 }
 </style>

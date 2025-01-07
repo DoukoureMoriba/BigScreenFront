@@ -358,7 +358,7 @@ export default {
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none monlogo"
         style="x"
       >
-               <img src="img/bigscreen_logowith.png" alt="logo" style="height:30px;width:100%;">
+               <img src="img/bigscreen_logowith.png" alt="logo" class="bigscreen-img" style="height:30px;width:100%;">
 
       </a>
       <hr />
@@ -393,7 +393,7 @@ export default {
     </div>
 
 
-  <h1 class="text-black text-end  mx-5" style="font-family:n-bold;"> Bienvenue sur la page des statistiques</h1>
+  <h1 class="text-black text-end  mx-5 my-title" style="font-family:n-bold;"> Bienvenue sur la page des statistiques</h1>
     <div class="d-flex flex-wrap wrapper_chart">
       <div style="background-color: white" >
         <canvas id="myPieChart6" class="chart m-4 "> </canvas>
@@ -470,10 +470,6 @@ margin-left: 0;
 justify-content: center;
   }
 
-.text-disap {
-  display: none;
-}
-
   .mysidebar {
     width: 100% !important;
     height:auto  !important;
@@ -482,5 +478,65 @@ justify-content: center;
   }
 
 }
+
+@media screen and (max-width: 769px) {
+
+  .my-title{
+    font-size: 25px !important;
+    
+  }
+
+}
+
+@media screen and (max-width: 426px) {
+
+  .my-title{
+    font-size: 18px !important;
+    margin: 15px
+  }
+
+  .bigscreen-img{
+    width: 150px !important;
+    height: 30px !important;
+  }
+
+  
+
+}
+
+@media screen and (max-width: 376px) {
+
+  .my-title{
+    font-size: 15px !important;
+    margin: 15px
+  }
+
+  .bigscreen-img{
+    width: 150px !important;
+    height: 30px !important;
+  }
+
+  
+
+}
+
+@media screen and (max-width: 320px) {
+
+  .my-title{
+    font-size: 12px !important;
+    margin: 15px
+  }
+
+  .bigscreen-img{
+    width: 150px !important;
+    height: 30px !important;
+  }
+
+  .chart{
+    margin: 0px !important;
+  }
+
+}
+
 
 </style>

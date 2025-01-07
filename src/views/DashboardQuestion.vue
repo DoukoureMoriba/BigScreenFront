@@ -73,7 +73,7 @@ export default {
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
         style="x"
       >
-       <img src="img/bigscreen_logowith.png" alt="logo" style="height:30px;width:100%;">
+       <img src="img/bigscreen_logowith.png" class="bigscreen-logo" alt="logo" style="height:30px;width:100%;">
         
       </a>
       <hr />
@@ -185,30 +185,105 @@ h3 {
 }
 
 /* Affichage pour écrans de taille moyenne */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 426px) {
 
-body {
-   font-size: 12px !important;
-   
-}
-.content {
-  margin: 0px !important;
-  padding: 5px !important;
-  margin: 5px !important;
- 
-}
-
-.text-disap {
-  display: none !important;
-}
 
   .mysidebar {
-    width: 70% !important;
+    width: 100% !important;
     height:auto  !important;
     position: relative !important;
     display: block !important;
   }
 
+ main{
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh !important;
+ }
+
+ .content{
+  margin: 0px !important;
+  padding: 10px !important;
+  height: 100% !important ;
+ }
+
+ .content tbody thead{
+ font-size: 5px !important;
+ }
+
+.bigscreen-logo{
+  width: 120px !important;
+  height: auto !important;
 }
+
+}
+
+@media screen and (max-width: 376px) {
+
+
+  .mysidebar {
+    width: 100% !important;
+    height:auto  !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+ main{
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh !important;
+ }
+
+ .content{
+  margin: 0px !important;
+  padding: 10px !important;
+  height: 100% !important ;
+ }
+
+ .content tbody thead{
+ font-size: 5px !important;
+ }
+
+.bigscreen-logo{
+  width: 120px !important;
+  height: auto !important;
+}
+
+@media screen and (max-width: 321px) {
+
+
+  .mysidebar {
+    width: 100% !important;
+    height:auto  !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+ main{
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh !important;
+ }
+
+ .content{
+  margin: 0px !important;
+  padding: 10px !important;
+  height: 100% !important ;
+ }
+
+ .content thead tr th{
+ font-size: 15px !important;
+ }
+
+.bigscreen-logo{
+  width: 120px !important;
+  height: auto !important;
+}
+
+}
+
+}
+
+
 
 </style>

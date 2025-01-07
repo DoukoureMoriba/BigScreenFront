@@ -61,8 +61,9 @@ export default {
 }
 
 * {
-    margin:0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 
@@ -179,6 +180,7 @@ button:active {
     pad: 0 20px;
 }
 
+
 /*fin style image de fond*/
 
 /* style pour le bouton*/
@@ -270,18 +272,74 @@ button:hover .button-text {
  color: #fff;
 }
 /*fin style pour le bouton */
+/* POUR LES MOBILES (Écrans ≤ 767px) */
+@media (max-width: 767px) {
+  /* Header */
+  #showCase {
+    padding: 10px; /* Ajout d'un padding pour éviter que le contenu touche les bords */
+    height: 100vh; /* Permet au contenu de s'adapter */
+    justify-content: center; /* Ajuste la position des éléments */
+    align-items: center;
+  }
 
-/* pour les écrans de mobile */
-    @media (max-width: 767px) {
-        a {
-    font-size: 17px;
-    text-decoration: none
+  .welcome-ttl {
+    font-size: 28px; /* Réduction de la taille du titre */
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
 
+  .welcome-txt {
+    font-size: 18px; /* Réduction du texte descriptif */
+    margin-bottom: 15px;
+    text-align: center; /* Alignement pour un rendu lisible */
+  }
+
+  .btn-welc {
+    font-size: 12px; /* Réduction de la taille du texte */
+    padding: 10px 20px; /* Réduction du padding pour un meilleur ajustement */
+  }
+
+  img {
+    width: 80%; /* Redimensionne l'image pour s'adapter à l'écran */
+    max-width: 300px; /* Limite la taille maximale de l'image */
+    height: auto;
+  }
 }
 
-body {
-     font-size: 14px;
+/* POUR LES TABLETTES (Écrans entre 768px et 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Header */
+  #showCase {
+    padding: 20px; /* Légèrement plus de padding que mobile */
+    height: 100vh;
+    justify-content: center;
+  }
+
+  .welcome-ttl {
+    font-size: 40px; /* Ajuste le titre pour une meilleure lisibilité */
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+
+  .welcome-txt {
+    font-size: 22px; /* Texte descriptif un peu plus grand que mobile */
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  .btn-welc {
+    font-size: 14px; /* Taille intermédiaire */
+    padding: 15px 30px; /* Padding légèrement réduit */
+  }
+
+  img {
+    width: 100%; /* L'image occupe toute la largeur */
+    max-width: 400px; /* Limite maximale pour éviter un rendu trop large */
+    height: auto;
+  }
 }
-    }
+
+
+    
 
 </style>
